@@ -33,11 +33,11 @@
       "logo": "https://example.com/static/images/logo.png",
       "image": "https://example.com/static/images/og-share.jpg",
       "description": "{{ seo_description }}",
-      "telephone": "+989120000000",
+      "telephone": " { 09192199086 }  { 09217310092 }",
       "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "خیابان آزادی، پلاک ۱۰۰",
+        "streetAddress": "تهران ",
         "addressLocality": "تهران",
         "addressRegion": "تهران",
         "postalCode": "1234567890",
@@ -212,7 +212,20 @@
     <!-- Top Neon Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
-    <!-- Interactive Canvas Particle Field -->
+    <!-- Dynamic SVG Scroll-Driven Circuit Lines (Idea 2) -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden lg:block" viewBox="0 0 1440 2500" fill="none">
+        <defs>
+            <linearGradient id="circuit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.8" />
+                <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.8" />
+            </linearGradient>
+        </defs>
+        <!-- Futuristic circuit path tracing through sections -->
+        <path id="circuit-path" d="M 1200, 150 L 1200, 500 Q 1200, 750 720, 850 T 240, 1400 L 240, 1800 Q 240, 2100 720, 2250 L 1200, 2350" stroke="url(#circuit-grad)" stroke-width="2" stroke-dasharray="1000" stroke-dashoffset="1000" transition="stroke-dashoffset 0.1s ease-out" />
+    </svg>
+
+    <!-- Interactive Canvas Particle Field (Hidden on mobile) -->
     <canvas id="particle-canvas" class="absolute inset-0 pointer-events-none z-0 opacity-40 hidden md:block"></canvas>
 
     <!-- Active Dot-Grid Background Overlay -->
@@ -222,20 +235,28 @@
     <header class="border-b border-slate-900/60 backdrop-blur-xl bg-brand-dark/40 sticky top-0 z-50 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             
-            <!-- Day/Night Theme Switcher (Top Left) -->
-            <button onclick="toggleTheme()" class="text-brand-textSecondary hover:text-brand-accent p-2 rounded-lg border border-slate-900/50 bg-brand-card/60 backdrop-blur-md focus:outline-none transition-all duration-300" aria-label="تغییر تم سایت">
-                <!-- Sun Icon -->
-                <svg id="theme-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
-                <!-- Moon Icon -->
-                <svg id="theme-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-            </button>
+            <!-- Day/Night Theme Toggler & Eye-Catching CTA (Top Left) -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleTheme()" class="text-brand-textSecondary hover:text-brand-accent p-2 rounded-lg border border-slate-900/50 bg-brand-card/60 backdrop-blur-md focus:outline-none transition-all duration-300" aria-label="تغییر تم سایت">
+                    <svg id="theme-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
+                    <svg id="theme-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
 
-            <!-- Navigation Links (Desktop only) -->
-            <nav class="hidden md:flex gap-8 lg:gap-10 text-xs font-semibold uppercase tracking-wider text-brand-textSecondary">
+                <!-- Highly Eye-Catching Pulsing Contact Button -->
+                <a href="tel:09120000000" class="relative px-5 py-2 sm:px-6 sm:py-2.5 rounded-lg border border-brand-accent bg-brand-dark hover:border-brand-accent text-slate-100 text-xs font-bold transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.35)] animate-pulse hover:animate-none group overflow-hidden">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
+                    <span class="relative z-10">ارتباط با ما</span>
+                </a>
+            </div>
+
+            <!-- Custom Ordered Navigation Links (Desktop only) -->
+            <nav class="hidden xl:flex gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-brand-textSecondary">
                 <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
-                <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">نمونه کارها</a>
+                <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">پروژه‌های انجام شده</a>
+                <a href="{% url 'pages:electronics' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">بینوکس الکترونیک</a>
                 <a href="#simulator" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">آنالیز سرعت</a>
-                <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">شناسنامه فنی</a>
+                <a href="{% url 'pages:articles' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">مقاله‌های تکنولوژی</a>
+                <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
                 <a href="#" onclick="toggleTerminal()" class="text-brand-purple hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
                     کنسول بینوکس
@@ -253,7 +274,7 @@
             </div>
 
             <!-- Hamburger Button (Mobile Trigger) -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-brand-textSecondary hover:text-brand-accent focus:outline-none z-50">
+            <button onclick="toggleMobileMenu()" class="xl:hidden text-brand-textSecondary hover:text-brand-accent focus:outline-none z-50">
                 <svg id="hamburger-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
@@ -261,19 +282,21 @@
         </div>
 
         <!-- Mobile Full View Menu Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-[65px] h-[calc(100vh-65px)] bg-brand-dark/98 backdrop-blur-2xl z-40 px-8 py-12 flex flex-col justify-start gap-8 text-center shadow-2xl transition-all duration-300 overflow-y-auto">
+        <div id="mobile-menu" class="hidden xl:hidden fixed inset-x-0 top-[65px] h-[calc(100vh-65px)] bg-brand-dark/98 backdrop-blur-2xl z-40 px-8 py-12 flex flex-col justify-start gap-8 text-center shadow-2xl transition-all duration-300 overflow-y-auto">
             <button onclick="toggleTheme(); toggleMobileMenu();" class="text-sm font-semibold text-brand-textSecondary hover:text-brand-accent flex justify-center items-center gap-2 py-3 border-b border-slate-900/40">تغییر تم سایت</button>
             <a href="#" onclick="toggleMobileMenu()" class="text-base font-bold text-brand-accent tracking-wide">صفحه اصلی</a>
-            <a href="#gallery" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">نمونه کارها</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">پروژه‌های انجام شده</a>
+            <a href="{% url 'pages:electronics' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">بینوکس الکترونیک</a>
             <a href="#simulator" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">آنالیز سرعت</a>
-            <a href="#about" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">شناسنامه فنی</a>
+            <a href="{% url 'pages:articles' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">مقاله‌های تکنولوژی</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">درباره ما</a>
             <a href="#" onclick="toggleMobileMenu(); toggleTerminal();" class="text-base font-semibold text-brand-purple hover:text-brand-accent transition-colors flex items-center justify-center gap-2">
                 <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
                 کنسول بینوکس
             </a>
             <div class="pt-6 border-t border-slate-900/40">
                 <a href="tel:09120000000" class="block w-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent hover:bg-brand-accent hover:text-brand-dark py-3.5 rounded-xl text-xs font-bold transition-all duration-300">
-                    ارتباط فردا، امروز
+                    ارتباط با ما
                 </a>
             </div>
         </div>
@@ -317,21 +340,6 @@
                     <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
                         شروع ماجراجویی با بینوکس
                     </a>
-                    <button onclick="toggleTerminal()" class="relative group overflow-hidden border border-slate-800 bg-brand-card text-brand-textSecondary hover:border-brand-purple text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-brand-purple animate-pulse"></span>
-                        اجرای ترمینال توسعه‌دهندگان
-                    </button>
-                </div>
-
-                <!-- IDEA 1: Dynamic Interactive Backend Pipeline Schema Dispatcher -->
-                <div class="mt-8 pt-6 border-t border-slate-900/40 flex flex-col gap-3">
-                    <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold text-center lg:text-right">معماری پویای پایپ‌لاین داده (روی گره‌ها کلیک کنید)</span>
-                    <div class="grid grid-cols-4 gap-2 text-center text-[10px] font-mono">
-                        <button onclick="schemaDispatch('client')" class="p-2 rounded-lg border border-slate-900 bg-brand-card/80 text-brand-textSecondary hover:border-brand-accent transition-all duration-300">مرورگر</button>
-                        <button onclick="schemaDispatch('nginx')" class="p-2 rounded-lg border border-slate-900 bg-brand-card/80 text-brand-textSecondary hover:border-brand-neonBlue transition-all duration-300">Nginx</button>
-                        <button onclick="schemaDispatch('django')" class="p-2 rounded-lg border border-slate-900 bg-brand-card/80 text-brand-textSecondary hover:border-brand-accent transition-all duration-300">Django</button>
-                        <button onclick="schemaDispatch('db')" class="p-2 rounded-lg border border-slate-900 bg-brand-card/80 text-brand-textSecondary hover:border-brand-purple transition-all duration-300">Postgres</button>
-                    </div>
                 </div>
             </div>
 
@@ -551,7 +559,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
-        <p class="px-4">© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
+        <p class="px-4">© 2026 گروه بینوکس (Binux).  پیاده‌سازی شده و طراحی شده توسط بینوکس .</p>
     </footer>
 
     <!-- INTERACTIVE CYBER TERMINAL OVERLAY -->
@@ -707,12 +715,24 @@
             });
         }
 
-        // Neon Scroll Progress Bar
+        // Neon Scroll Progress Bar & Idea 2: SVG Circuit Line Scroll-Driven Progress
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
+            
+            // 1. Top linear neon progress
             document.getElementById('scroll-progress').style.width = scrolled + '%';
+
+            // 2. SVG Circuit progress
+            const scrollPercent = winScroll / height;
+            const path = document.getElementById('circuit-path');
+            if (path) {
+                const pathLength = path.getTotalLength();
+                path.style.strokeDasharray = pathLength;
+                // Dashoffset goes from pathLength down to 0 to trace the path as we scroll!
+                path.style.strokeDashoffset = pathLength * (1 - scrollPercent);
+            }
         });
 
         // Multi-Tab Typewriter Engine with 10-Second Looping Reset
@@ -769,29 +789,6 @@
             type();
         }
 
-        // IDEA 1: Dynamic Interactive Backend Pipeline Schema Dispatcher
-        function schemaDispatch(component) {
-            const dbCode = `# PostgreSQL Connection Tuning\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql',\n        'NAME': 'binux_db',\n        'CONN_MAX_AGE': 600, # Connection Pool\n    }\n}`;
-            const nginxCode = `# Nginx Server block configuration\nserver {\n    listen 80;\n    server_name binux.ir;\n    location /static/ {\n        alias /home/binux/static/;\n    }\n}`;
-            const clientCode = `// Fetch API with async lifecycle\nasync function fetchProjects() {\n  const res = await fetch('/api/projects/');\n  const data = await res.json();\n  return data;\n}`;
-
-            playCyberSound(900, 'sawtooth', 0.1, 0.02);
-
-            if (component === 'db') {
-                codeTabs.py = dbCode;
-                switchTab('py');
-            } else if (component === 'nginx') {
-                codeTabs.css = nginxCode;
-                switchTab('css');
-            } else if (component === 'django') {
-                codeTabs.py = `# Django WSGI Thread Lifecycle\nimport os\nfrom django.core.wsgi import get_wsgi_application\nos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')\napplication = get_wsgi_application()`;
-                switchTab('py');
-            } else if (component === 'client') {
-                codeTabs.html = clientCode;
-                switchTab('html');
-            }
-        }
-
         // IDEA 2: Cyber Performance & SEO Simulator Tool Engine
         function runDiagnosticSimulation() {
             const urlInput = document.getElementById('sim-url').value.trim();
@@ -829,7 +826,7 @@
             }, 2900);
         }
 
-        // IDEA 3: spec Microchip accordion toggle
+        // IDEA 3: spec Microchip code snippet reveal
         function toggleChipset(cardElement, codeId) {
             playCyberSound(1000, 'sine', 0.04, 0.02);
             const codeBlock = document.getElementById(codeId);
@@ -838,7 +835,7 @@
             codeBlock.classList.toggle('hidden');
         }
 
-        // Desktop-Only Particles Canvas Background System
+        // Desktop-Only Particles Canvas Background System (Saves Mobile Resources)
         let canvas, ctx, particles = [];
         
         function initCanvas() {
@@ -1094,7 +1091,15 @@
 
             // Attach Audio Beeps to Interactive Elements
             attachSoundEvents();
+
+            // Touchscreen safe filtering (disables 3D physics tilt)
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (!isTouchDevice && isDesktop) {
+                initTiltPhysics();
+            }
         });
     </script>
 </body>
 </html>
+
+
