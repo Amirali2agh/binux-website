@@ -53,23 +53,81 @@
                 <p class="text-slate-400 text-xs sm:text-sm">راه‌های ارتباطی رسمی و اطلاعات هویت تجاری آژانس دیجیتال بینوکس.</p>
             </div>
 
+            <!-- Vector Icon Contact Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
-                    <span class="text-[10px] text-slate-500 font-mono"># ADDRESS</span>
-                    <p class="text-xs font-bold text-slate-200 leading-relaxed">  تهران   </p>
+                
+                <!-- 1. Address Card (Emerald Accent) -->
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl flex items-start gap-4 hover:border-emerald-500/20 transition-all duration-300">
+                    <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 text-[#10B981] rounded-xl flex items-center justify-center shrink-0">
+                        <!-- Location Pin SVG -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-slate-500 font-mono tracking-widest">ADDRESS</span>
+                        <p class="text-xs font-bold text-slate-200 leading-relaxed">تهران،۴</p>
+                    </div>
                 </div>
-                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
-                    <span class="text-[10px] text-slate-500 font-mono"># TELEPHONE</span>
-                    <p class="text-xs font-bold text-slate-200">{ 09192199086 }  { 09217310092 }</p>
+
+                <!-- 2. Telephone Card (Laser Blue Accent) -->
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl flex items-start gap-4 hover:border-blue-500/20 transition-all duration-300">
+                    <div class="p-3 bg-blue-500/10 border border-blue-500/20 text-[#3B82F6] rounded-xl flex items-center justify-center shrink-0">
+                        <!-- Phone Receiver SVG -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305 1.142a10.5 10.5 0 004.872 4.872l1.142-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-slate-500 font-mono tracking-widest">TELEPHONE</span>
+                        <p class="text-xs font-bold text-slate-200 font-mono">{09192199086} {09217310092}</p>
+                    </div>
                 </div>
-                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
-                    <span class="text-[10px] text-slate-500 font-mono"># EMAIL SUPPORT</span>
-                    <p class="text-xs font-bold text-slate-200 font-mono">support@binux.ir</p>
+
+                <!-- 3. Email Card (Synth Purple Accent) -->
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl flex items-start gap-4 hover:border-purple-500/20 transition-all duration-300">
+                    <div class="p-3 bg-purple-500/10 border border-purple-500/20 text-[#8B5CF6] rounded-xl flex items-center justify-center shrink-0">
+                        <!-- Envelope SVG -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-slate-500 font-mono tracking-widest">EMAIL SUPPORT</span>
+                        <p class="text-xs font-bold text-slate-200 font-mono">support@binux.ir</p>
+                    </div>
                 </div>
-                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
-                    <span class="text-[10px] text-slate-500 font-mono"># TELEGRAM / INSTAGRAM</span>
-                    <p class="text-xs font-bold text-slate-200 font-mono">@binux.tech</p>
-                </div>
+
+                <!-- 4. Telegram Card (Sky Blue/Cyan Accent) -->
+                <a href="https://t.me/binux_studio" target="_blank" class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl flex items-start gap-4 hover:border-cyan-500/30 hover:bg-[#060913]/90 transition-all duration-300">
+                    <div class="p-3 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center shrink-0">
+                        <!-- Telegram Paper Plane SVG -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-slate-500 font-mono tracking-widest">TELEGRAM</span>
+                        <p class="text-xs font-bold text-slate-200 font-mono">binux.tech@</p>
+                    </div>
+                </a>
+
+                <!-- 5. Instagram Card (Pink/Rose Gradient Accent) -->
+                <a href="https://instagram.com/binux_studio" target="_blank" class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl flex items-start gap-4 hover:border-rose-500/30 hover:bg-[#060913]/90 transition-all duration-300 sm:col-span-2">
+                    <div class="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl flex items-center justify-center shrink-0">
+                        <!-- Instagram Camera SVG -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[10px] text-slate-500 font-mono tracking-widest">INSTAGRAM</span>
+                        <p class="text-xs font-bold text-slate-200 font-mono">binux.tech@</p>
+                    </div>
+                </a>
+
             </div>
 
             <!-- ENAMAD Holographic Placeholder (Highly stylized) -->
@@ -85,7 +143,7 @@
             </div>
         </div>
 
-        <!-- Left Column: The Fun Interactive Developer Coffee Engine (بخش جذاب و بامزه) -->
+        <!-- Left Column: The Fun Interactive Developer Coffee Engine -->
         <div class="w-full max-w-md mx-auto lg:ml-auto">
             <div class="bg-[#060913]/90 border border-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div class="absolute -top-1/4 -left-1/4 w-64 h-64 rounded-full bg-[#8B5CF6]/10 blur-3xl"></div>
@@ -96,7 +154,11 @@
                     </div>
                     
                     <h3 class="text-lg font-bold text-slate-200">موتور تبدیل قهوه به کد</h3>
-                    <p class="text-slate-400 text-xs">برای تزریق کافیین به بینوکس و افزایش خطوط کد، روی دکمه زیر کلیک کنید!</p>
+                    <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">آدرس دامنه سایت فعلی خود را وارد کنید تا سیستم بینوکس سرعت بارگذاری، معماری بک‌اند و رتبه سئوی آن را شبیه‌سازی و بررسی کند.</p>
+                    
+                    <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+                        با کلیک بر روی دکمه زیر، به مهندسین بینوکس کافیین تزریق کنید تا سرعت پردازش ذهنی آن‌ها و متعاقباً خطوط کد تولید شده به صورت زنده ارتقا یابند!
+                    </p>
                     
                     <!-- Interactive Visual Coffee Cup representation -->
                     <div class="py-6 flex justify-center">
