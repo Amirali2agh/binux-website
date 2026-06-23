@@ -18,23 +18,29 @@
     <meta property="og:title" content="طراحی سایت‌های پیشرفته با بینوکس (Binux)">
     <meta property="og:description" content="آژانس دیجیتال بینوکس (Binux) ارائه دهنده خدمات طراحی سایت مدرن با جنگو.">
 
+    <!-- Fonts: Premium Persian Typography -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
     <!-- Tailwind CSS with custom styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
                     colors: {
                         brand: {
-                            dark: '#02040a', /* Deepest space black */
-                            card: '#080c14', /* Futuristic dark glass */
-                            accent: '#10B981', /* Emerald */
-                            neonBlue: '#3B82F6', /* Electric */
-                            purple: '#8B5CF6', /* Cyber Purple */
+                            dark: '#010206', /* Ultra-Deep Space Black */
+                            card: '#060913', /* High-End Glassmorphism Dark */
+                            accent: '#10B981', /* Cyber Emerald */
+                            neonBlue: '#3B82F6', /* Laser Blue */
+                            purple: '#8B5CF6', /* Synth Purple */
                         },
                         animation: {
                             'text-gradient': 'text-gradient 6s linear infinite',
-                            'spin-slow': 'spin 8s linear infinite',
+                            'spin-slow': 'spin 15s linear infinite',
                         },
                         keyframes: {
                             'text-gradient': {
@@ -49,15 +55,15 @@
     </script>
 
     <style>
-        /* Modern Dot-Grid with Radial Gradient Mask (fades to the edges) */
+        /* Interactive grid fades to the edges smoothly */
         .dot-grid {
             background-size: 32px 32px;
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             mask-image: radial-gradient(circle, black 40%, transparent 95%);
             -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
         }
 
-        /* Animated Progress Scroll Bar */
+        /* Top neon color-shifting progress bar */
         #scroll-progress {
             height: 3px;
             background: linear-gradient(to right, #10B981, #3B82F6, #8B5CF6);
@@ -69,9 +75,9 @@
             transition: width 0.1s ease-out;
         }
 
-        /* Cursor Glow spotlight for the interactive hero */
+        /* Ambient spotlight tracking the mouse across the whole page */
         .cursor-spotlight-bg {
-            background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.08) 0%, rgba(59, 130, 246, 0.05) 30%, transparent 70%);
+            background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.04) 0%, rgba(59, 130, 246, 0.02) 40%, transparent 80%);
         }
 
         /* Blinking typing cursor */
@@ -88,16 +94,61 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Animated border for cards */
-        @keyframes border-beam {
-            100% { offset-distance: 100%; }
+        /* Laser Beam border effect on Hover */
+        .border-beam-container {
+            position: relative;
+        }
+        .border-beam-container::before {
+            content: '';
+            position: absolute;
+            inset: -1.5px;
+            background: linear-gradient(90deg, #10B981, #3B82F6, #8B5CF6, #10B981);
+            background-size: 300% 300%;
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: moveGradient 6s linear infinite;
+        }
+        .border-beam-container:hover::before {
+            opacity: 0.65;
+        }
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 3D Holographic Tilt physics settings (Only active on desktop) */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+        }
+        .tilt-card-inner {
+            transform: translateZ(25px);
+        }
+
+        /* Custom Scrollbar for Terminal */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #02040a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #10B981;
+            border-radius: 2px;
         }
     </style>
 </head>
-<body class="bg-brand-dark text-slate-100 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="bg-brand-dark text-slate-100 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden select-none">
 
     <!-- Top Neon Scroll Progress Bar -->
     <div id="scroll-progress"></div>
+
+    <!-- Interactive Canvas Particle Field (Underlay) -->
+    <canvas id="particle-canvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></style></canvas>
 
     <!-- Active Dot-Grid Background Overlay -->
     <div class="absolute inset-0 dot-grid pointer-events-none z-0"></div>
@@ -106,23 +157,55 @@
     <header class="border-b border-slate-900/60 backdrop-blur-xl bg-brand-dark/40 sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             
-            <!-- Logo with Cyan Radial Glow -->
+            <!-- Logo with dynamic fallback in static environment -->
             <div class="flex items-center gap-3 relative group">
                 <div class="absolute -inset-2 bg-brand-neonBlue/10 rounded-full blur-xl group-hover:bg-brand-accent/20 transition-all duration-500"></div>
-                <img src="{% static 'images/logo.png' %}" alt="بینوکس لوگو" class="h-9 w-auto relative z-10 hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+                <img src="{% static 'images/logo.png' %}" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';" alt="بینوکس لوگو" class="h-9 w-auto relative z-10 hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+                
+                <!-- Modern vector logo if image file not loaded yet -->
+                <div id="logo-fallback" class="hidden relative z-10 items-center gap-2 font-black text-sm tracking-wider text-slate-100">
+                    <span class="text-brand-accent">&lt;</span>BINUX<span class="text-brand-neonBlue">/&gt;</span>
+                </div>
             </div>
 
-            <!-- Navigation Links -->
+            <!-- Navigation Links (Desktop) -->
             <nav class="hidden md:flex gap-10 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
                 <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">نمونه کارها</a>
-                <a href="#tutorials" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">آموزش</a>
-                <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره</a>
+                <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">شناسنامه فنی</a>
+                <a href="#" onclick="toggleTerminal()" class="text-brand-purple hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
+                    کنسول بینوکس
+                </a>
             </nav>
 
-            <a href="tel:09120000000" class="relative overflow-hidden group border border-brand-accent/30 bg-brand-dark hover:border-brand-accent px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300">
-                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
-                <span class="relative z-10 text-slate-100 group-hover:text-brand-dark transition-colors duration-300">تماس با بینوکس</span>
+            <!-- Call to Action Button (Desktop) -->
+            <div class="hidden md:flex">
+                <a href="tel:09120000000" class="relative overflow-hidden group border border-brand-accent/30 bg-brand-dark hover:border-brand-accent px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
+                    <span class="relative z-10 text-slate-100 group-hover:text-brand-dark transition-colors duration-300">ارتباط فردا، امروز</span>
+                </a>
+            </div>
+
+            <!-- Hamburger Button (Mobile Navigation Trigger) -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-brand-accent focus:outline-none z-50">
+                <svg id="hamburger-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu (Slide-down effect) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-[100%] left-0 w-full bg-brand-dark/95 border-b border-slate-900/90 backdrop-blur-2xl z-40 px-6 py-8 flex flex-col gap-6 text-center shadow-2xl transition-all">
+            <a href="#" onclick="toggleMobileMenu()" class="text-sm font-bold text-brand-accent">صفحه اصلی</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors">نمونه کارها</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors">شناسنامه فنی</a>
+            <a href="#" onclick="toggleMobileMenu(); toggleTerminal();" class="text-sm font-semibold text-brand-purple hover:text-brand-accent transition-colors flex items-center justify-center gap-2">
+                <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
+                کنسول بینوکس
+            </a>
+            <a href="tel:09120000000" class="bg-brand-accent/10 border border-brand-accent/20 text-brand-accent hover:bg-brand-accent hover:text-brand-dark py-3 rounded-xl text-xs font-bold transition-all duration-300">
+                ارتباط فردا، امروز
             </a>
         </div>
     </header>
@@ -132,29 +215,33 @@
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative z-10">
             
             <!-- Right Column: Animated Typography & Text -->
-            <div class="space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-brand-accent text-xs font-semibold rounded-full border border-brand-accent/20">
+            <div class="space-y-6 text-center lg:text-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-brand-accent text-[11px] font-semibold rounded-full border border-brand-accent/20">
                     <span class="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping"></span>
                     <span>معماری آینده‌نگر بک‌اَند با جنگو</span>
                 </div>
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-slate-100 leading-tight md:leading-none tracking-tight">
-                    توسعه وب‌سایت‌های <br>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-100 leading-tight md:leading-none tracking-tight">
+                    توسعه وب‌سایت‌های <br class="hidden sm:inline">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-cyan-400 to-brand-purple bg-[size:200%] animate-[text-gradient_6s_linear_infinite]">فوق‌پیشرفته و مدرن</span>
                 </h1>
-                <p class="text-slate-400 text-sm md:text-base max-w-lg leading-relaxed">
+                <p class="text-slate-400 text-xs sm:text-sm md:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
                     در آژانس دیجیتال بینوکس (Binux)، ما قالب‌های وب را به اپلیکیشن‌های زنده و پرسرعت تبدیل می‌کنیم. ترکیبی از مهندسی دیتابیس با انیمیشن‌های تعاملی و سئوی حداکثری.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                     <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
                         شروع ماجراجویی با بینوکس
                     </a>
+                    <button onclick="toggleTerminal()" class="relative group overflow-hidden border border-slate-800 bg-brand-card text-slate-300 hover:border-brand-purple text-center px-8 py-4 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-brand-purple animate-pulse"></span>
+                        اجرای ترمینال توسعه‌دهندگان
+                    </button>
                 </div>
             </div>
 
             <!-- Left Column: Code Editor Card with Tab Switcher -->
             <div class="w-full max-w-xl mx-auto lg:mr-auto relative group">
                 <!-- Glowing Dynamic Aura Behind Editor -->
-                <div class="absolute -inset-2 bg-gradient-to-r from-brand-accent via-brand-neonBlue to-brand-purple rounded-2xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div class="absolute -inset-2 bg-gradient-to-r from-brand-accent via-brand-neonBlue to-brand-purple rounded-2xl blur-2xl opacity-15 group-hover:opacity-35 transition duration-1000"></div>
                 
                 <div class="relative bg-brand-card/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
                     <!-- Titlebar / Tab Switcher (Interactive) -->
@@ -173,7 +260,7 @@
                         </div>
                     </div>
                     <!-- Typing Code Canvas -->
-                    <div class="p-6 font-mono text-[11px] md:text-xs leading-relaxed text-slate-300 min-h-[290px] flex flex-col justify-start bg-brand-card/95">
+                    <div class="p-6 font-mono text-[10px] sm:text-xs leading-relaxed text-slate-300 min-h-[290px] flex flex-col justify-start bg-brand-card/95">
                         <pre class="whitespace-pre-wrap font-mono select-none" id="typewriter-code" dir="ltr"></pre><span class="cursor"></span>
                     </div>
                 </div>
@@ -187,21 +274,21 @@
         </div>
     </section>
 
-    <!-- Section 2: Portfolio Gallery (With Glowing Interactive Cards) -->
+    <!-- Section 2: Portfolio Gallery (With Glowing Interactive Cards & 3D Tilt) -->
     <section id="gallery" class="py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-20 space-y-3">
-                <h2 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">پروژه‌های متمایز بینوکس</h2>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 font-sans">پروژه‌های متمایز بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
                 <p class="text-slate-400 text-xs">گلچینی از مدرن‌ترین پروژه‌های وب که مرزهای طراحی فرانت‌اَند و کارایی بک‌اَند را بازتعریف کرده‌اند.</p>
             </div>
 
-            <!-- Cyberpunk Project Cards Grid -->
+            <!-- Django Portfolio Grid with Fallbacks -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- Card 1 -->
-                <div class="group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 hover:border-brand-accent/40 hover:shadow-[0_0_35px_rgba(16,185,129,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(16,185,129,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative space-y-4 z-10">
+                    <div class="tilt-card-inner relative space-y-4 z-10">
                         <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-accent/30 transition-colors">
                             <span class="text-xs font-mono text-brand-accent tracking-widest">[// E-COMMERCE ENGINE]</span>
                         </div>
@@ -215,14 +302,14 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 hover:border-brand-neonBlue/40 hover:shadow-[0_0_35px_rgba(59,130,246,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(59,130,246,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-neonBlue/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative space-y-4 z-10">
+                    <div class="tilt-card-inner relative space-y-4 z-10">
                         <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-neonBlue/30 transition-colors">
                             <span class="text-xs font-mono text-brand-neonBlue tracking-widest">[// SAAS REALTIME DATA]</span>
                         </div>
                         <h3 class="text-lg font-bold text-slate-100">داشبورد آماری بینوفلو</h3>
-                        <p class="text-slate-400 text-xs leading-relaxed">بستر مانیتورینگ بلورین داده‌های کلان با پروتکل ارتباطی ریل‌تایم و امنیت پیشرفته توزیع اطلاعات.</p>
+                        <p class="text-slate-400 text-xs leading-relaxed">بستر مانیتورینگ داده‌های کلان با پروتکل ارتباطی ریل‌تایم و امنیت پیشرفته توزیع اطلاعات بصورت گرافیک زنده.</p>
                         <div class="flex gap-2 pt-2">
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">WebSockets</span>
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Tailwind v4</span>
@@ -231,9 +318,9 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 hover:border-brand-purple/40 hover:shadow-[0_0_35px_rgba(139,92,246,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(139,92,246,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-purple/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative space-y-4 z-10">
+                    <div class="tilt-card-inner relative space-y-4 z-10">
                         <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-purple/30 transition-colors">
                             <span class="text-xs font-mono text-brand-purple tracking-widest">[// HEADLESS WEB APP]</span>
                         </div>
@@ -253,7 +340,7 @@
     <section id="about" class="py-24 border-t border-slate-900/60 relative z-10 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-20 space-y-3">
-                <h2 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">شناسنامه فنی بینوکس</h2>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 font-sans">شناسنامه فنی بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
                 <p class="text-slate-400 text-xs">استانداردهای مهندسی‌شده و جزئیات تکنولوژیک که تضمین‌کننده موفقیت هر پروژه است.</p>
             </div>
@@ -284,7 +371,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                     </div>
                     <h3 class="text-sm font-bold text-slate-200">الگوریتم اختصاصی سئو</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed">رندر کامل تگ‌های ساختاریافته وب‌سایت در سمت سرور به همراه خروجی نقشه اتوماتیک برای خزنده‌ها [1].</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">رندر کامل تگ‌های ساختاریافته وب‌سایت در سمت سرور به همراه خروجی نقشه اتوماتیک برای خزنده‌ها.</p>
                 </div>
 
                 <!-- Spec 4 -->
@@ -293,16 +380,42 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
                     <h3 class="text-sm font-bold text-slate-200">زیرساخت داکرایز</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed">بسته‌بندی کدهای پروژه در مخازن داکر به همراه ایزوله‌سازی سرویس‌ها برای انتقال بی‌دردسر به سرور اوبونتو.</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">بسته‌بندی کدهای پروژه در مخازن داکر به همراه ایزوله‌سازی سرویس‌ها برای انتقال بی‌دردسر به سرورهای ابری لینوکس.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10">
-        <p>© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در لینوکس.</p>
+    <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
+        <p>© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
+
+    <!-- INTERACTIVE CYBER TERMINAL OVERLAY -->
+    <div id="terminal-overlay" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-2xl bg-[#030712] border border-brand-accent/30 rounded-xl shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col overflow-hidden h-[450px]">
+            <!-- Header bar of Terminal -->
+            <div class="bg-black/90 border-b border-slate-900 px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-rose-500 rounded-full inline-block cursor-pointer" onclick="toggleTerminal()"></span>
+                    <span class="text-xs font-mono text-slate-400">binux@engine-system:~$</span>
+                </div>
+                <span class="text-[10px] font-mono text-brand-accent">پورت امن ۲۲ فعال است</span>
+            </div>
+            <!-- Terminal Output/Input Area -->
+            <div id="terminal-body" class="p-4 flex-1 overflow-y-auto font-mono text-xs text-slate-300 space-y-2 custom-scrollbar select-text" dir="ltr">
+                <p class="text-brand-accent">Binux Operational Engine (v2.6-stable)</p>
+                <p class="text-slate-500">For help, type <span class="text-white">"help"</span> and press Enter.</p>
+                <div id="terminal-history"></div>
+                
+                <!-- Prompt Line -->
+                <div class="flex items-center gap-2 pt-2">
+                    <span class="text-brand-accent">binux@web:~$</span>
+                    <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-slate-200 font-mono caret-brand-accent" autocomplete="off" autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Futuristic Interactive Javascript Features -->
     <script>
@@ -324,7 +437,7 @@
             document.getElementById('scroll-progress').style.width = scrolled + '%';
         });
 
-        // 3. Multi-Tab Typewriter Engine
+        // 3. Multi-Tab Typewriter Engine with 10-Second Looping Reset
         const codeTabs = {
             py: `# Binux Core Architecture Setup\n\nclass BinuxEngine:\n    def __init__(self):\n        self.brand_name = "Binux"\n        self.core_framework = "Django"\n        self.seo_boost = True\n        self.visually_stunning = True\n\n    def boot_studio(self):\n        return "🚀 System initialized: Binux is live!"\n\n# Instantiate the engine\nengine = BinuxEngine()\nprint(engine.boot_studio())`,
             
@@ -334,9 +447,11 @@
         };
 
         let currentAnimationId = null;
+        let loopTimeoutId = null;
+        let currentActiveTab = 'py';
 
         function switchTab(tabName) {
-            // Update Tab active UI states
+            currentActiveTab = tabName;
             const tabs = ['py', 'html', 'css'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
@@ -349,12 +464,10 @@
                 }
             });
 
-            // Cancel any active typing animation
-            if (currentAnimationId) {
-                clearTimeout(currentAnimationId);
-            }
+            // Cancel any active typing or resetting loops
+            if (currentAnimationId) clearTimeout(currentAnimationId);
+            if (loopTimeoutId) clearTimeout(loopTimeoutId);
 
-            // Start typing new code
             typeCode(codeTabs[tabName]);
         }
 
@@ -362,22 +475,207 @@
             const target = document.getElementById('typewriter-code');
             target.textContent = '';
             let i = 0;
-            const speed = 15; // Faster typing for better UX when switching tabs
+            const speed = 15; 
 
             function type() {
                 if (i < text.length) {
                     target.textContent += text.charAt(i);
                     i++;
                     currentAnimationId = setTimeout(type, speed);
+                } else {
+                    // Complete. Wait 10 seconds (10000ms), then clear and rewrite
+                    loopTimeoutId = setTimeout(() => {
+                        typeCode(text);
+                    }, 10000);
                 }
             }
             type();
         }
 
-        // Initialize first tab (Python) on load
+        // 4. Interactive Particles Canvas Background System (Cybernetic Nodes)
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                
+                // Draw connection lines between near nodes
+                for (let j = index + 1; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x;
+                    const dy = p.y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - dist / 110)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize script logic
         document.addEventListener('DOMContentLoaded', () => {
             typeCode(codeTabs.py);
+            initParticles();
+            animateParticles();
+
+            // Safe mobile-touch filtering: Disable heavy 3D Tilt calculations on Touchscreens
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (!isTouchDevice) {
+                initTiltPhysics();
+            }
         });
+
+        // 5. Advanced 3D Holographic Tilt Physics (Desktop Only)
+        function initTiltPhysics() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10; // gentle angle
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            });
+        }
+
+        // 6. Interactive Cyber Terminal Controller
+        const terminalOverlay = document.getElementById('terminal-overlay');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalHistory = document.getElementById('terminal-history');
+        const terminalBody = document.getElementById('terminal-body');
+
+        function toggleTerminal() {
+            terminalOverlay.classList.toggle('hidden');
+            if (!terminalOverlay.classList.contains('hidden')) {
+                terminalInput.focus();
+            }
+        }
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value.trim().toLowerCase();
+                processCommand(command);
+                terminalInput.value = '';
+            }
+        });
+
+        function printLine(text, cssClass = "text-slate-300") {
+            const line = document.createElement('p');
+            line.className = cssClass;
+            line.innerHTML = text;
+            terminalHistory.appendChild(line);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function processCommand(cmd) {
+            printLine(`<span class="text-brand-accent">binux@web:~$</span> ${cmd}`);
+            if (cmd === '') return;
+
+            switch (cmd) {
+                case 'help':
+                    printLine("Standard System Tools list:", "text-slate-500");
+                    printLine("  <span class='text-brand-neonBlue'>about</span>       - About Binux technical core team");
+                    printLine("  <span class='text-brand-neonBlue'>django-test</span> - Run a secure diagnostics validation pipeline on Django config");
+                    printLine("  <span class='text-brand-neonBlue'>uptime</span>      - System process lifecycle metrics");
+                    printLine("  <span class='text-brand-neonBlue'>clear</span>       - Clear all history from workspace shell buffer");
+                    break;
+                case 'about':
+                    printLine("Binux (بینوکس) represents the cutting edge of modern web apps.");
+                    printLine("We craft tailored Python/Django architectures linked with blazing-fast user interfaces.", "text-brand-accent");
+                    break;
+                case 'django-test':
+                    printLine("Initializing system components...", "text-yellow-500 animate-pulse");
+                    setTimeout(() => {
+                        printLine("✓ Active connection: PostgreSQL server OK.");
+                        printLine("✓ Securing channels: CSRF, HTTPS Redirects configured.");
+                        printLine("✓ Static distribution ready.");
+                        printLine("STATUS: System is optimal. Ready for massive scale.", "text-brand-accent");
+                    }, 800);
+                    break;
+                case 'uptime':
+                    printLine("Up: 724 days, 14 hours, 12 minutes. Zero downtime deployments active.");
+                    break;
+                case 'clear':
+                    terminalHistory.innerHTML = '';
+                    break;
+                default:
+                    printLine(`Command not found: "${cmd}". Type "help" for a list of available operations.`, "text-red-400");
+            }
+        }
+
+        // 7. Mobile Navigation Drawer Controller
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                // Change hamburger into close (X) icon using SVG transform
+                hamburgerIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`;
+            } else {
+                // Back to standard hamburger
+                hamburgerIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`;
+            }
+        }
     </script>
 </body>
 </html>
