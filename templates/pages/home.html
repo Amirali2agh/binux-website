@@ -33,11 +33,11 @@
       "logo": "https://example.com/static/images/logo.png",
       "image": "https://example.com/static/images/og-share.jpg",
       "description": "{{ seo_description }}",
-      "telephone": " { 09192199086 }  { 09217310092 }",
+      "telephone": "+989120000000",
       "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "تهران ",
+        "streetAddress": "خیابان آزادی، پلاک ۱۰۰",
         "addressLocality": "تهران",
         "addressRegion": "تهران",
         "postalCode": "1234567890",
@@ -221,7 +221,6 @@
                 <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.8" />
             </linearGradient>
         </defs>
-        <!-- Futuristic circuit path tracing through sections -->
         <path id="circuit-path" d="M 1200, 150 L 1200, 500 Q 1200, 750 720, 850 T 240, 1400 L 240, 1800 Q 240, 2100 720, 2250 L 1200, 2350" stroke="url(#circuit-grad)" stroke-width="2" stroke-dasharray="1000" stroke-dashoffset="1000" transition="stroke-dashoffset 0.1s ease-out" />
     </svg>
 
@@ -256,7 +255,7 @@
                 <a href="{% url 'pages:electronics' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">بینوکس الکترونیک</a>
                 <a href="#simulator" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">آنالیز سرعت</a>
                 <a href="{% url 'pages:articles' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">مقاله‌های تکنولوژی</a>
-                <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
+                <a href="{% url 'pages:about' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
                 <a href="#" onclick="toggleTerminal()" class="text-brand-purple hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
                     کنسول بینوکس
@@ -289,7 +288,7 @@
             <a href="{% url 'pages:electronics' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">بینوکس الکترونیک</a>
             <a href="#simulator" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">آنالیز سرعت</a>
             <a href="{% url 'pages:articles' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">مقاله‌های تکنولوژی</a>
-            <a href="#about" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">درباره ما</a>
+            <a href="{% url 'pages:about' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">درباره ما</a>
             <a href="#" onclick="toggleMobileMenu(); toggleTerminal();" class="text-base font-semibold text-brand-purple hover:text-brand-accent transition-colors flex items-center justify-center gap-2">
                 <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
                 کنسول بینوکس
@@ -378,7 +377,7 @@
         </div>
     </section>
 
-    <!-- Section 2: Portfolio Gallery (With Glowing Spotlight Cursor-Tracking Border Cards) -->
+    <!-- Section 2: Portfolio Gallery -->
     <section id="gallery" class="py-16 sm:py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
@@ -398,11 +397,11 @@
                         <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-accent/30 transition-colors">
                             <span class="text-xs font-mono text-brand-accent tracking-widest">[// E-COMMERCE ENGINE]</span>
                         </div>
-                        <h3 class="text-base sm:text-lg font-bold text-brand-textPrimary">پلتفرم نکسوس شاپ</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">پلتفرم نکسوس شاپ</h3>
                         <p class="text-brand-textSecondary text-xs leading-relaxed">فروشگاه فوق‌سریع نسل جدید به همراه مدیریت پویا و پیشرفته انبارداری و اتصال امن به درگاه‌های بین‌المللی.</p>
                         <div class="flex gap-2 pt-1">
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">Django Rest</span>
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">PostgreSQL</span>
+                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Django Rest</span>
+                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">PostgreSQL</span>
                         </div>
                     </div>
                 </div>
@@ -416,11 +415,11 @@
                         <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-neonBlue/30 transition-colors">
                             <span class="text-xs font-mono text-brand-neonBlue tracking-widest">[// SAAS REALTIME DATA]</span>
                         </div>
-                        <h3 class="text-base sm:text-lg font-bold text-brand-textPrimary">داشبورد آماری بینوفلو</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">داشبورد آماری بینوفلو</h3>
                         <p class="text-brand-textSecondary text-xs leading-relaxed">بستر مانیتورینگ داده‌های کلان با پروتکل ارتباطی ریل‌تایم و امنیت پیشرفته توزیع اطلاعات بصورت گرافیک زنده.</p>
                         <div class="flex gap-2 pt-1">
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">WebSockets</span>
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">Tailwind v4</span>
+                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">WebSockets</span>
+                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Tailwind v4</span>
                         </div>
                     </div>
                 </div>
@@ -434,7 +433,7 @@
                         <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-purple/30 transition-colors">
                             <span class="text-xs font-mono text-brand-purple tracking-widest">[// HEADLESS WEB APP]</span>
                         </div>
-                        <h3 class="text-base sm:text-lg font-bold text-brand-textPrimary">آرت استودیو سی‌ام‌اس</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">آرت استودیو سی‌ام‌اس</h3>
                         <p class="text-brand-textSecondary text-xs leading-relaxed">وب‌سایت اختصاصی کانون طراحان با ساختار مدیریت محتوای بدون‌سرور و رندرهای لحظه‌ای گرافیکی.</p>
                         <div class="flex gap-2 pt-1">
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">Headless CMS</span>
@@ -559,7 +558,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
-        <p class="px-4">© 2026 گروه بینوکس (Binux).  پیاده‌سازی شده و طراحی شده توسط بینوکس .</p>
+        <p class="px-4">© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
 
     <!-- INTERACTIVE CYBER TERMINAL OVERLAY -->
@@ -730,7 +729,6 @@
             if (path) {
                 const pathLength = path.getTotalLength();
                 path.style.strokeDasharray = pathLength;
-                // Dashoffset goes from pathLength down to 0 to trace the path as we scroll!
                 path.style.strokeDashoffset = pathLength * (1 - scrollPercent);
             }
         });
@@ -1091,15 +1089,7 @@
 
             // Attach Audio Beeps to Interactive Elements
             attachSoundEvents();
-
-            // Touchscreen safe filtering (disables 3D physics tilt)
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            if (!isTouchDevice && isDesktop) {
-                initTiltPhysics();
-            }
         });
     </script>
 </body>
 </html>
-
-

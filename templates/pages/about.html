@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seo_title }}</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dot-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-[#010206] text-slate-100 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden select-none">
+    
+    <!-- Active Dot-Grid Background Overlay -->
+    <div class="absolute inset-0 dot-grid pointer-events-none z-0"></div>
+
+    <div class="absolute top-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/5 blur-[150px] pointer-events-none"></div>
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-900/60 backdrop-blur-xl bg-[#010206]/40 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="tel:09120000000" class="border border-emerald-500/20 bg-emerald-500/5 hover:bg-[#10B981] hover:text-[#010206] px-5 py-2 rounded-lg text-xs font-bold transition-all duration-300">
+                ارتباط با ما
+            </a>
+            
+            <nav class="hidden md:flex gap-8 text-xs font-semibold">
+                <a href="{% url 'pages:home' %}" class="text-slate-400 hover:text-[#10B981]">خانه</a>
+                <a href="{% url 'pages:home' %}#gallery" class="text-slate-400 hover:text-[#10B981]">پروژه‌ها</a>
+                <a href="{% url 'pages:electronics' %}" class="text-slate-400 hover:text-[#10B981]">بینوکس الکترونیک</a>
+                <a href="{% url 'pages:articles' %}" class="text-slate-400 hover:text-[#10B981]">مقاله‌های تکنولوژی</a>
+                <a href="{% url 'pages:about' %}" class="text-[#10B981] border-b-2 border-[#10B981] pb-1">درباره ما</a>
+            </nav>
+
+            <div class="font-black text-sm tracking-wider text-slate-100">
+                <span class="text-[#10B981]">&lt;</span>BINUX<span class="text-[#3B82F6]">/&gt;</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-16 relative z-10 w-full flex-grow grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Right Column: Contact info & ENAMAD -->
+        <div class="space-y-8">
+            <div class="space-y-3 text-center lg:text-right">
+                <h1 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-400">ارتباط با بینوکس</h1>
+                <div class="w-12 h-1 bg-[#10B981] mx-auto lg:mx-0 rounded-full"></div>
+                <p class="text-slate-400 text-xs sm:text-sm">راه‌های ارتباطی رسمی و اطلاعات هویت تجاری آژانس دیجیتال بینوکس.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
+                    <span class="text-[10px] text-slate-500 font-mono"># ADDRESS</span>
+                    <p class="text-xs font-bold text-slate-200 leading-relaxed">  تهران   </p>
+                </div>
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
+                    <span class="text-[10px] text-slate-500 font-mono"># TELEPHONE</span>
+                    <p class="text-xs font-bold text-slate-200">{ 09192199086 }  { 09217310092 }</p>
+                </div>
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
+                    <span class="text-[10px] text-slate-500 font-mono"># EMAIL SUPPORT</span>
+                    <p class="text-xs font-bold text-slate-200 font-mono">support@binux.ir</p>
+                </div>
+                <div class="bg-[#060913]/60 border border-slate-900 p-5 rounded-2xl space-y-1">
+                    <span class="text-[10px] text-slate-500 font-mono"># TELEGRAM / INSTAGRAM</span>
+                    <p class="text-xs font-bold text-slate-200 font-mono">@binux.tech</p>
+                </div>
+            </div>
+
+            <!-- ENAMAD Holographic Placeholder (Highly stylized) -->
+            <div class="border border-emerald-500/20 bg-emerald-500/5 rounded-2xl p-6 flex items-center justify-between gap-4 max-w-sm mx-auto lg:mx-0">
+                <div class="space-y-1">
+                    <span class="text-[10px] text-emerald-400 font-bold tracking-wider">ELECTRONIC TRUST BADGE</span>
+                    <h3 class="text-xs font-black text-slate-200">نشان اعتماد الکترونیکی (اینماد)</h3>
+                    <p class="text-[10px] text-slate-500">هویت حقوقی و تراکنش‌های امن بینوکس تایید شده است.</p>
+                </div>
+                <div class="w-14 h-14 bg-[#010206] border border-slate-900 rounded-xl flex items-center justify-center text-xs font-mono text-[#10B981] shadow-lg shadow-emerald-500/10">
+                    e-Namad
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Column: The Fun Interactive Developer Coffee Engine (بخش جذاب و بامزه) -->
+        <div class="w-full max-w-md mx-auto lg:ml-auto">
+            <div class="bg-[#060913]/90 border border-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-1/4 -left-1/4 w-64 h-64 rounded-full bg-[#8B5CF6]/10 blur-3xl"></div>
+                
+                <div class="relative space-y-6 text-center">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 text-[#8B5CF6] text-[10px] font-semibold rounded-full border border-purple-500/20">
+                        <span>پروتکل انرژی مانیتورینگ بینوکس</span>
+                    </div>
+                    
+                    <h3 class="text-lg font-bold text-slate-200">موتور تبدیل قهوه به کد</h3>
+                    <p class="text-slate-400 text-xs">برای تزریق کافیین به بینوکس و افزایش خطوط کد، روی دکمه زیر کلیک کنید!</p>
+                    
+                    <!-- Interactive Visual Coffee Cup representation -->
+                    <div class="py-6 flex justify-center">
+                        <div class="relative w-20 h-24 bg-gradient-to-b from-[#060913] to-[#010206] border-2 border-slate-800 rounded-b-2xl rounded-t-sm flex items-end justify-center shadow-inner overflow-hidden">
+                            <!-- Fluid Level rising dynamically -->
+                            <div id="coffee-level" class="w-full bg-gradient-to-t from-amber-900 to-yellow-800 h-[20%] transition-all duration-500"></div>
+                            <!-- Handle of the cup -->
+                            <div class="absolute -right-5 top-1/4 w-6 h-10 border-2 border-slate-800 rounded-r-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="grid grid-cols-2 gap-4 border-t border-slate-900/60 pt-6 text-center font-mono">
+                        <div>
+                            <span class="block text-[10px] text-slate-500">COFFEE INTAKE</span>
+                            <span class="block text-xl font-black text-[#10B981]"><span id="coffee-count">0</span> فنجان</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500">SYSTEM STABILITY</span>
+                            <span class="block text-xl font-black text-[#3B82F6]"><span id="cpu-speed">1.2</span> GHz</span>
+                        </div>
+                    </div>
+
+                    <button onclick="injectCaffeine()" class="w-full bg-[#8B5CF6] hover:bg-purple-600 text-slate-100 font-extrabold py-3.5 rounded-xl text-xs tracking-wider transition-all duration-300 shadow-lg shadow-purple-500/15">
+                        ☕ دم کردن یک فنجان قهوه
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10">
+        <p>© 2026 گروه بینوکس (Binux). پیاده‌سازی شده در اکوسیستم اوبونتو لینوکس.</p>
+    </footer>
+
+    <!-- Interactive script for the Coffee game and Web Audio Synthesized Sounds -->
+    <script>
+        let audioCtx = null;
+        let coffeeCount = 0;
+        let cpuSpeed = 1.2;
+
+        function playSynthSound(freq = 800, type = 'sine', duration = 0.1, volume = 0.05) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        function injectCaffeine() {
+            coffeeCount++;
+            cpuSpeed = (1.2 + (coffeeCount * 0.3)).toFixed(1);
+            
+            // Audio feed: High pitch dynamic synth bubble beep
+            playSynthSound(900 + (coffeeCount * 50), 'triangle', 0.15, 0.04);
+            
+            // update UI elements
+            document.getElementById('coffee-count').textContent = coffeeCount;
+            document.getElementById('cpu-speed').textContent = cpuSpeed;
+            
+            // Rising fluid level inside cup limit to 95%
+            const newHeight = Math.min(15 + (coffeeCount * 8), 95);
+            document.getElementById('coffee-level').style.height = newHeight + '%';
+        }
+    </script>
+</body>
+</html>

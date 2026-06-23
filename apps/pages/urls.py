@@ -1,10 +1,11 @@
 from django.urls import path
-from apps.pages.views import HomeView, ComingSoonView
+from apps.pages.views import HomeView, ElectronicsView, ArticlesView, AboutView
 
 app_name = "pages"
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
-    path("electronics/", ComingSoonView.as_view(page_title="بینوکس الکترونیک"), name="electronics"),
-    path("articles/", ComingSoonView.as_view(page_title="مقاله‌های تکنولوژی"), name="articles"),
+    path("electronics/", ElectronicsView.as_view(), name="electronics"),
+    path("articles/", ArticlesView.as_view(), name="articles"),
+    path("about/", AboutView.as_view(), name="about"),
 ]
