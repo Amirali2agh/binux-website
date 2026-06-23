@@ -3,23 +3,69 @@
 <html lang="fa" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- Meta Tags for SEO -->
-    <title>طراحی سایت‌های پیشرفته با بینوکس (Binux) | بهینه‌سازی شده برای گوگل</title>
-    <meta name="description" content="آژانس دیجیتال بینوکس (Binux) ارائه دهنده خدمات طراحی سایت مدرن با جنگو، متمرکز بر سرعت بی‌نظیر، معماری مقیاس‌پذیر و اصول حرفه‌ای سئو.">
-    <meta name="keywords" content="بینوکس, Binux, طراحی وب سایت, سئو سایت, جنگو لینوکس">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <!-- Open Graph (Social SEO) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:title" content="طراحی سایت‌های پیشرفته با بینوکس (Binux)">
-    <meta property="og:description" content="آژانس دیجیتال بینوکس (Binux) ارائه دهنده خدمات طراحی سایت مدرن با جنگو.">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:image" content="/static/images/og-share.jpg">
 
     <!-- Fonts: Premium Persian Typography -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+    <!-- Google Structured Data (JSON-LD Schema) for Advanced SEO Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "آژانس دیجیتال بینوکس",
+      "alternateName": "Binux",
+      "url": "{{ canonical_url }}",
+      "logo": "https://example.com/static/images/logo.png",
+      "image": "https://example.com/static/images/og-share.jpg",
+      "description": "{{ seo_description }}",
+      "telephone": "+989120000000",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "خیابان آزادی، پلاک ۱۰۰",
+        "addressLocality": "تهران",
+        "addressRegion": "تهران",
+        "postalCode": "1234567890",
+        "addressCountry": "IR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "35.6997",
+        "longitude": "51.3380"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://github.com/binux",
+        "https://linkedin.com/company/binux"
+      ]
+    }
+    </script>
 
     <!-- Tailwind CSS with custom styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -75,9 +121,18 @@
             transition: width 0.1s ease-out;
         }
 
-        /* Ambient spotlight tracking the mouse across the whole page */
-        .cursor-spotlight-bg {
-            background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.04) 0%, rgba(59, 130, 246, 0.02) 40%, transparent 80%);
+        /* Desktop Spotlight: Mouse Tracking */
+        @media (min-width: 1024px) {
+            .cursor-spotlight-bg {
+                background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(16, 185, 129, 0.04) 0%, rgba(59, 130, 246, 0.02) 40%, transparent 80%);
+            }
+        }
+
+        /* Mobile Spotlight: Static Ambient Center-Glow (Saves CPU & looks gorgeous) */
+        @media (max-width: 1023px) {
+            .cursor-spotlight-bg {
+                background: radial-gradient(320px circle at 50% 35%, rgba(16, 185, 129, 0.06) 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%);
+            }
         }
 
         /* Blinking typing cursor */
@@ -119,7 +174,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 3D Holographic Tilt physics settings (Only active on desktop) */
+        /* 3D Holographic Tilt physics settings (Desktop only) */
         .tilt-card {
             transform-style: preserve-3d;
             perspective: 1000px;
@@ -147,29 +202,28 @@
     <!-- Top Neon Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
-    <!-- Interactive Canvas Particle Field (Underlay) -->
-    <canvas id="particle-canvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></style></canvas>
+    <!-- Interactive Canvas Particle Field (Hidden on mobile to save CPU and battery) -->
+    <canvas id="particle-canvas" class="absolute inset-0 pointer-events-none z-0 opacity-40 hidden md:block"></canvas>
 
     <!-- Active Dot-Grid Background Overlay -->
     <div class="absolute inset-0 dot-grid pointer-events-none z-0"></div>
 
-    <!-- Header / Navbar (Futuristic Blur) -->
+    <!-- Header / Navbar (Futuristic Glassmorphism) -->
     <header class="border-b border-slate-900/60 backdrop-blur-xl bg-brand-dark/40 sticky top-0 z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             
             <!-- Logo with dynamic fallback in static environment -->
             <div class="flex items-center gap-3 relative group">
                 <div class="absolute -inset-2 bg-brand-neonBlue/10 rounded-full blur-xl group-hover:bg-brand-accent/20 transition-all duration-500"></div>
-                <img src="{% static 'images/logo.png' %}" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';" alt="بینوکس لوگو" class="h-9 w-auto relative z-10 hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+                <img src="{% static 'images/logo.png' %}" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';" alt="بینوکس لوگو" class="h-8 sm:h-9 w-auto relative z-10 hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
                 
-                <!-- Modern vector logo if image file not loaded yet -->
-                <div id="logo-fallback" class="hidden relative z-10 items-center gap-2 font-black text-sm tracking-wider text-slate-100">
+                <div id="logo-fallback" class="hidden relative z-10 items-center gap-2 font-black text-xs sm:text-sm tracking-wider text-slate-100">
                     <span class="text-brand-accent">&lt;</span>BINUX<span class="text-brand-neonBlue">/&gt;</span>
                 </div>
             </div>
 
-            <!-- Navigation Links (Desktop) -->
-            <nav class="hidden md:flex gap-10 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <!-- Navigation Links (Desktop only) -->
+            <nav class="hidden md:flex gap-8 lg:gap-10 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
                 <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">نمونه کارها</a>
                 <a href="#about" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">شناسنامه فنی</a>
@@ -179,15 +233,15 @@
                 </a>
             </nav>
 
-            <!-- Call to Action Button (Desktop) -->
+            <!-- Call to Action Button (Desktop only) -->
             <div class="hidden md:flex">
-                <a href="tel:09120000000" class="relative overflow-hidden group border border-brand-accent/30 bg-brand-dark hover:border-brand-accent px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300">
+                <a href="tel:09120000000" class="relative overflow-hidden group border border-brand-accent/30 bg-brand-dark hover:border-brand-accent px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300">
                     <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
                     <span class="relative z-10 text-slate-100 group-hover:text-brand-dark transition-colors duration-300">ارتباط فردا، امروز</span>
                 </a>
             </div>
 
-            <!-- Hamburger Button (Mobile Navigation Trigger) -->
+            <!-- Hamburger Button (Mobile Trigger) -->
             <button onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-brand-accent focus:outline-none z-50">
                 <svg id="hamburger-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -195,106 +249,124 @@
             </button>
         </div>
 
-        <!-- Mobile Drawer Menu (Slide-down effect) -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-[100%] left-0 w-full bg-brand-dark/95 border-b border-slate-900/90 backdrop-blur-2xl z-40 px-6 py-8 flex flex-col gap-6 text-center shadow-2xl transition-all">
-            <a href="#" onclick="toggleMobileMenu()" class="text-sm font-bold text-brand-accent">صفحه اصلی</a>
-            <a href="#gallery" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors">نمونه کارها</a>
-            <a href="#about" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-300 hover:text-brand-accent transition-colors">شناسنامه فنی</a>
-            <a href="#" onclick="toggleMobileMenu(); toggleTerminal();" class="text-sm font-semibold text-brand-purple hover:text-brand-accent transition-colors flex items-center justify-center gap-2">
+        <!-- Mobile Full View Menu Drawer (Fixed Overlay for Perfect UX) -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-[65px] h-[calc(100vh-65px)] bg-brand-dark/98 backdrop-blur-2xl z-40 px-8 py-12 flex flex-col justify-start gap-8 text-center shadow-2xl transition-all duration-300 overflow-y-auto">
+            <a href="#" onclick="toggleMobileMenu()" class="text-base font-bold text-brand-accent tracking-wide">صفحه اصلی</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="text-base font-semibold text-slate-300 hover:text-brand-accent transition-colors">نمونه کارها</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-base font-semibold text-slate-300 hover:text-brand-accent transition-colors">شناسنامه فنی</a>
+            <a href="#" onclick="toggleMobileMenu(); toggleTerminal();" class="text-base font-semibold text-brand-purple hover:text-brand-accent transition-colors flex items-center justify-center gap-2">
                 <span class="w-1.5 h-1.5 bg-brand-purple rounded-full animate-ping"></span>
                 کنسول بینوکس
             </a>
-            <a href="tel:09120000000" class="bg-brand-accent/10 border border-brand-accent/20 text-brand-accent hover:bg-brand-accent hover:text-brand-dark py-3 rounded-xl text-xs font-bold transition-all duration-300">
-                ارتباط فردا، امروز
-            </a>
+            <div class="pt-6 border-t border-slate-900">
+                <a href="tel:09120000000" class="block w-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent hover:bg-brand-accent hover:text-brand-dark py-3.5 rounded-xl text-xs font-bold transition-all duration-300">
+                    ارتباط فردا، امروز
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Section 1: Interactive Hero Section (With Cursor Tracking) -->
-    <section id="hero-section" class="min-h-[92vh] flex items-center py-12 md:py-24 relative z-10 cursor-spotlight-bg transition-all duration-150">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative z-10">
+    <!-- Section 1: Interactive Hero Section -->
+    <section id="hero-section" class="min-h-[88vh] flex items-center py-8 sm:py-12 lg:py-24 relative z-10 cursor-spotlight-bg transition-all duration-150">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full relative z-10">
             
-            <!-- Right Column: Animated Typography & Text -->
-            <div class="space-y-6 text-center lg:text-right">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-brand-accent text-[11px] font-semibold rounded-full border border-brand-accent/20">
+            <!-- Right Column: Text & CTA -->
+            <div class="space-y-5 text-center lg:text-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-brand-accent text-[10px] sm:text-[11px] font-semibold rounded-full border border-brand-accent/20">
                     <span class="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping"></span>
                     <span>معماری آینده‌نگر بک‌اَند با جنگو</span>
                 </div>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-100 leading-tight md:leading-none tracking-tight">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-slate-100 leading-tight md:leading-none tracking-tight">
                     توسعه وب‌سایت‌های <br class="hidden sm:inline">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-cyan-400 to-brand-purple bg-[size:200%] animate-[text-gradient_6s_linear_infinite]">فوق‌پیشرفته و مدرن</span>
                 </h1>
                 <p class="text-slate-400 text-xs sm:text-sm md:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
                     در آژانس دیجیتال بینوکس (Binux)، ما قالب‌های وب را به اپلیکیشن‌های زنده و پرسرعت تبدیل می‌کنیم. ترکیبی از مهندسی دیتابیس با انیمیشن‌های تعاملی و سئوی حداکثری.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                    <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
+                
+                <!-- Live Core Engine Metrics Dashboard Visualizer -->
+                <div class="flex gap-6 items-center pt-2 text-[10px] font-mono text-slate-500 justify-center lg:justify-start">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping"></span>
+                        <span>پینگ اتصال: <span id="metric-ping" class="text-slate-300 font-bold">12ms</span></span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-neonBlue"></span>
+                        <span>سرعت بارگذاری: <span class="text-slate-300 font-bold">0.18s</span></span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
+                        <span>شاخص سئو گوگل: <span class="text-brand-accent font-bold">100/100</span></span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-3 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
+                    <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
                         شروع ماجراجویی با بینوکس
                     </a>
-                    <button onclick="toggleTerminal()" class="relative group overflow-hidden border border-slate-800 bg-brand-card text-slate-300 hover:border-brand-purple text-center px-8 py-4 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <button onclick="toggleTerminal()" class="relative group overflow-hidden border border-slate-800 bg-brand-card text-slate-300 hover:border-brand-purple text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-brand-purple animate-pulse"></span>
                         اجرای ترمینال توسعه‌دهندگان
                     </button>
                 </div>
             </div>
 
-            <!-- Left Column: Code Editor Card with Tab Switcher -->
+            <!-- Left Column: Code Editor Card -->
             <div class="w-full max-w-xl mx-auto lg:mr-auto relative group">
-                <!-- Glowing Dynamic Aura Behind Editor -->
-                <div class="absolute -inset-2 bg-gradient-to-r from-brand-accent via-brand-neonBlue to-brand-purple rounded-2xl blur-2xl opacity-15 group-hover:opacity-35 transition duration-1000"></div>
+                <div class="absolute -inset-2 bg-gradient-to-r from-brand-accent via-brand-neonBlue to-brand-purple rounded-2xl blur-xl opacity-15 group-hover:opacity-30 transition duration-1000"></div>
                 
                 <div class="relative bg-brand-card/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
-                    <!-- Titlebar / Tab Switcher (Interactive) -->
+                    <!-- Titlebar -->
                     <div class="bg-brand-dark/90 px-4 pt-3 pb-0 border-b border-slate-900 flex justify-between items-end">
                         <div class="flex gap-2 mb-3">
-                            <span class="w-2.5 h-2.5 bg-rose-500 rounded-full inline-block"></span>
-                            <span class="w-2.5 h-2.5 bg-amber-500 rounded-full inline-block"></span>
-                            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full inline-block"></span>
+                            <span class="w-2 h-2 bg-rose-500 rounded-full inline-block"></span>
+                            <span class="w-2 h-2 bg-amber-500 rounded-full inline-block"></span>
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full inline-block"></span>
                         </div>
                         
                         <!-- Interactive Tabs -->
-                        <div class="flex gap-1 text-[10px] font-mono">
-                            <button id="tab-py" onclick="switchTab('py')" class="px-3 py-2 border-b-2 border-brand-accent bg-brand-card text-brand-accent font-semibold rounded-t-lg transition-all">binux.py</button>
-                            <button id="tab-html" onclick="switchTab('html')" class="px-3 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">index.html</button>
-                            <button id="tab-css" onclick="switchTab('css')" class="px-3 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">style.css</button>
+                        <div class="flex gap-1 text-[9px] font-mono">
+                            <button id="tab-py" onclick="switchTab('py')" class="px-2 sm:px-3 py-1.5 border-b-2 border-brand-accent bg-brand-card text-brand-accent font-semibold rounded-t-lg transition-all">binux.py</button>
+                            <button id="tab-html" onclick="switchTab('html')" class="px-2 sm:px-3 py-1.5 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">index.html</button>
+                            <button id="tab-css" onclick="switchTab('css')" class="px-2 sm:px-3 py-1.5 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">style.css</button>
                         </div>
                     </div>
-                    <!-- Typing Code Canvas -->
-                    <div class="p-6 font-mono text-[10px] sm:text-xs leading-relaxed text-slate-300 min-h-[290px] flex flex-col justify-start bg-brand-card/95">
-                        <pre class="whitespace-pre-wrap font-mono select-none" id="typewriter-code" dir="ltr"></pre><span class="cursor"></span>
+                    <!-- Typing Canvas (break-all for perfect responsive wordwrap) -->
+                    <div class="p-4 sm:p-6 font-mono text-[9px] sm:text-[11px] md:text-xs leading-relaxed text-slate-300 min-h-[250px] sm:min-h-[290px] flex flex-col justify-start bg-brand-card/95 overflow-x-hidden break-all">
+                        <pre class="whitespace-pre-wrap font-mono select-none break-all" id="typewriter-code" dir="ltr"></pre><span class="cursor"></span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Scroll Down indicator -->
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-bounce cursor-pointer z-20">
-            <span class="text-[9px] uppercase tracking-widest text-slate-500">کشف شاهکارها</span>
-            <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-bounce cursor-pointer z-20">
+            <span class="text-[8px] sm:text-[9px] uppercase tracking-widest text-slate-500">کشف شاهکارها</span>
+            <svg class="w-3.5 h-3.5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
-    <!-- Section 2: Portfolio Gallery (With Glowing Interactive Cards & 3D Tilt) -->
-    <section id="gallery" class="py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20 space-y-3">
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 font-sans">پروژه‌های متمایز بینوکس</h2>
+    <!-- Section 2: Portfolio Gallery -->
+    <section id="gallery" class="py-16 sm:py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">پروژه‌های متمایز بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-slate-400 text-xs">گلچینی از مدرن‌ترین پروژه‌های وب که مرزهای طراحی فرانت‌اَند و کارایی بک‌اَند را بازتعریف کرده‌اند.</p>
+                <p class="text-slate-400 text-xs px-4">گلچینی از مدرن‌ترین پروژه‌های وب که مرزهای طراحی فرانت‌اَند و کارایی بک‌اَند را بازتعریف کرده‌اند.</p>
             </div>
 
-            <!-- Django Portfolio Grid with Fallbacks -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Responsive Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 <!-- Card 1 -->
-                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(16,185,129,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-5 sm:p-6 hover:shadow-[0_0_35px_rgba(16,185,129,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="tilt-card-inner relative space-y-4 z-10">
-                        <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-accent/30 transition-colors">
+                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-accent/30 transition-colors">
                             <span class="text-xs font-mono text-brand-accent tracking-widest">[// E-COMMERCE ENGINE]</span>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-100">پلتفرم نکسوس شاپ</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">پلتفرم نکسوس شاپ</h3>
                         <p class="text-slate-400 text-xs leading-relaxed">فروشگاه فوق‌سریع نسل جدید به همراه مدیریت پویا و پیشرفته انبارداری و اتصال امن به درگاه‌های بین‌المللی.</p>
-                        <div class="flex gap-2 pt-2">
+                        <div class="flex gap-2 pt-1">
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Django Rest</span>
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">PostgreSQL</span>
                         </div>
@@ -302,15 +374,15 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(59,130,246,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-5 sm:p-6 hover:shadow-[0_0_35px_rgba(59,130,246,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-neonBlue/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="tilt-card-inner relative space-y-4 z-10">
-                        <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-neonBlue/30 transition-colors">
+                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-neonBlue/30 transition-colors">
                             <span class="text-xs font-mono text-brand-neonBlue tracking-widest">[// SAAS REALTIME DATA]</span>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-100">داشبورد آماری بینوفلو</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">داشبورد آماری بینوفلو</h3>
                         <p class="text-slate-400 text-xs leading-relaxed">بستر مانیتورینگ داده‌های کلان با پروتکل ارتباطی ریل‌تایم و امنیت پیشرفته توزیع اطلاعات بصورت گرافیک زنده.</p>
-                        <div class="flex gap-2 pt-2">
+                        <div class="flex gap-2 pt-1">
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">WebSockets</span>
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Tailwind v4</span>
                         </div>
@@ -318,15 +390,15 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-6 hover:shadow-[0_0_35px_rgba(139,92,246,0.06)] overflow-hidden">
+                <div class="tilt-card border-beam-container group relative bg-slate-950/40 border border-slate-900 rounded-2xl p-5 sm:p-6 hover:shadow-[0_0_35px_rgba(139,92,246,0.06)] overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-b from-brand-purple/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="tilt-card-inner relative space-y-4 z-10">
-                        <div class="h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-purple/30 transition-colors">
+                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-purple/30 transition-colors">
                             <span class="text-xs font-mono text-brand-purple tracking-widest">[// HEADLESS WEB APP]</span>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-100">آرت استودیو سی‌ام‌اس</h3>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-100">آرت استودیو سی‌ام‌اس</h3>
                         <p class="text-slate-400 text-xs leading-relaxed">وب‌سایت اختصاصی کانون طراحان با ساختار مدیریت محتوای بدون‌سرور و رندرهای لحظه‌ای گرافیکی.</p>
-                        <div class="flex gap-2 pt-2">
+                        <div class="flex gap-2 pt-1">
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Headless CMS</span>
                             <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Django Rest</span>
                         </div>
@@ -336,17 +408,17 @@
         </div>
     </section>
 
-    <!-- Section 3: Specs Section (About) -->
-    <section id="about" class="py-24 border-t border-slate-900/60 relative z-10 scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20 space-y-3">
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 font-sans">شناسنامه فنی بینوکس</h2>
+    <!-- Section 3: Specs Section -->
+    <section id="about" class="py-16 sm:py-24 border-t border-slate-900/60 relative z-10 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">شناسنامه فنی بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-slate-400 text-xs">استانداردهای مهندسی‌شده و جزئیات تکنولوژیک که تضمین‌کننده موفقیت هر پروژه است.</p>
+                <p class="text-slate-400 text-xs px-4">استانداردهای مهندسی‌شده و جزئیات تکنولوژیک که تضمین‌کننده موفقیت هر پروژه است.</p>
             </div>
 
             <!-- Specs Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 <!-- Spec 1 -->
                 <div class="bg-brand-card/40 border border-slate-900/50 rounded-2xl p-6 space-y-4 hover:border-brand-accent/20 transition-colors duration-300">
                     <div class="w-10 h-10 bg-emerald-500/10 text-brand-accent rounded-lg flex items-center justify-center">
@@ -388,12 +460,12 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
-        <p>© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
+        <p class="px-4">© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
 
     <!-- INTERACTIVE CYBER TERMINAL OVERLAY -->
     <div id="terminal-overlay" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="w-full max-w-2xl bg-[#030712] border border-brand-accent/30 rounded-xl shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col overflow-hidden h-[450px]">
+        <div class="w-full max-w-2xl bg-[#030712] border border-brand-accent/30 rounded-xl shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col overflow-hidden h-[85vh] sm:h-[450px]">
             <!-- Header bar of Terminal -->
             <div class="bg-black/90 border-b border-slate-900 px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -419,17 +491,117 @@
 
     <!-- Futuristic Interactive Javascript Features -->
     <script>
-        // 1. Dynamic Cursor Spotlight Tracker
-        const heroSection = document.getElementById('hero-section');
-        heroSection.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            heroSection.style.setProperty('--mouse-x', `${x}px`);
-            heroSection.style.setProperty('--mouse-y', `${y}px`);
-        });
+        // Check for desktop screen to optimize features
+        const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
-        // 2. Neon Scroll Progress Bar
+        // 1. Web Audio API Sci-Fi Sound Synthesizer (Zero-Byte SFX)
+        let audioCtx = null;
+
+        function playCyberSound(frequency = 800, type = 'sine', duration = 0.08, volume = 0.03) {
+            try {
+                // Lazy-load the AudioContext upon first user interaction to bypass browser policies
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                // Create Audio Synthesis Nodes
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                // Configure Synthesizer wave parameters
+                oscillator.type = type;
+                oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+                // Dynamic exponential decay of volume for premium glass-click sound
+                gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+
+                // Play the dynamic generated wave
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Failsafe if Web Audio API is disabled by browser settings
+            }
+        }
+
+        // Attach premium sounds to hover & click events on interactive UI components
+        function attachSoundEvents() {
+            const hoverSound = () => playCyberSound(1200, 'sine', 0.04, 0.015);
+            const clickSound = () => playCyberSound(600, 'triangle', 0.12, 0.04);
+
+            // Bind to navigation, CTA, and terminal elements
+            document.querySelectorAll('a, button, [onclick]').forEach(element => {
+                element.addEventListener('mouseenter', hoverSound);
+                element.addEventListener('click', clickSound);
+            });
+        }
+
+        // 2. Holographic Text Decoder (Glitch Matrix Text Animation)
+        function decodeHolographicText(element, finalString, duration = 1500) {
+            const matrixChars = '01#X$/\\[]{}—=+*^?_@';
+            const length = finalString.length;
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progressRatio = Math.min(elapsed / duration, 1);
+
+                // Calculate current decoded characters length
+                const decodedCount = Math.floor(progressRatio * length);
+                let currentDisplay = finalString.substring(0, decodedCount);
+
+                // Scramble the rest of the text with digital codes
+                for (let i = decodedCount; i < length; i++) {
+                    if (finalString[i] === ' ' || finalString[i] === '\n') {
+                        currentDisplay += finalString[i];
+                    } else {
+                        currentDisplay += matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                    }
+                }
+
+                element.innerHTML = currentDisplay;
+
+                if (elapsed < duration) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.innerHTML = finalString; // Guarantee 100% clean final string for SEO
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        // 3. Dynamic Live Core Metrics Dashboard Visualizer
+        function startMetricsVisualizer() {
+            const pingElement = document.getElementById('metric-ping');
+            if (!pingElement) return;
+
+            setInterval(() => {
+                // Generate minor jitter for latency metrics simulating real DB connection
+                const randomLatency = Math.floor(Math.random() * 4) + 10; // 10ms - 13ms jitter
+                pingElement.textContent = `${randomLatency}ms`;
+            }, 3000);
+        }
+
+        // 4. Dynamic Cursor Spotlight Tracker (Only runs on Desktop for efficiency)
+        if (isDesktop) {
+            const heroSection = document.getElementById('hero-section');
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                heroSection.style.setProperty('--mouse-x', `${x}px`);
+                heroSection.style.setProperty('--mouse-y', `${y}px`);
+            });
+        }
+
+        // 5. Neon Scroll Progress Bar
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -437,7 +609,7 @@
             document.getElementById('scroll-progress').style.width = scrolled + '%';
         });
 
-        // 3. Multi-Tab Typewriter Engine with 10-Second Looping Reset
+        // 6. Multi-Tab Typewriter Engine with 10-Second Looping Reset
         const codeTabs = {
             py: `# Binux Core Architecture Setup\n\nclass BinuxEngine:\n    def __init__(self):\n        self.brand_name = "Binux"\n        self.core_framework = "Django"\n        self.seo_boost = True\n        self.visually_stunning = True\n\n    def boot_studio(self):\n        return "🚀 System initialized: Binux is live!"\n\n# Instantiate the engine\nengine = BinuxEngine()\nprint(engine.boot_studio())`,
             
@@ -464,7 +636,6 @@
                 }
             });
 
-            // Cancel any active typing or resetting loops
             if (currentAnimationId) clearTimeout(currentAnimationId);
             if (loopTimeoutId) clearTimeout(loopTimeoutId);
 
@@ -483,7 +654,7 @@
                     i++;
                     currentAnimationId = setTimeout(type, speed);
                 } else {
-                    // Complete. Wait 10 seconds (10000ms), then clear and rewrite
+                    // Complete. Wait 10 seconds, then clear and rewrite
                     loopTimeoutId = setTimeout(() => {
                         typeCode(text);
                     }, 10000);
@@ -492,17 +663,29 @@
             type();
         }
 
-        // 4. Interactive Particles Canvas Background System (Cybernetic Nodes)
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        // 7. Desktop-Only Particles Canvas Background System (Saves Mobile Resources)
+        let canvas, ctx, particles = [];
+        
+        function initCanvas() {
+            canvas = document.getElementById('particle-canvas');
+            if (!canvas || window.innerWidth < 1024) return; // Completely ignores particles on mobile screens
+
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+        }
         
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
 
         class Particle {
             constructor() {
@@ -530,6 +713,7 @@
         }
 
         function initParticles() {
+            if (!canvas) return;
             const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
             particles = [];
             for (let i = 0; i < particleCount; i++) {
@@ -538,18 +722,18 @@
         }
 
         function animateParticles() {
+            if (!canvas || window.innerWidth < 1024) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p, index) => {
                 p.update();
                 p.draw();
                 
-                // Draw connection lines between near nodes
                 for (let j = index + 1; j < particles.length; j++) {
                     const dx = p.x - particles[j].x;
                     const dy = p.y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 110) {
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - dist / 110)})`;
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.12 * (1 - dist / 110)})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
@@ -564,17 +748,26 @@
         // Initialize script logic
         document.addEventListener('DOMContentLoaded', () => {
             typeCode(codeTabs.py);
-            initParticles();
-            animateParticles();
+            initCanvas();
+            startMetricsVisualizer();
 
-            // Safe mobile-touch filtering: Disable heavy 3D Tilt calculations on Touchscreens
+            // Decode title with holographic sci-fi effect
+            const h1Title = document.querySelector('h1');
+            if (h1Title) {
+                decodeHolographicText(h1Title, "توسعه وب‌سایت‌های <br class='hidden sm:inline'> فوق‌پیشرفته و مدرن", 2000);
+            }
+
+            // Attach Audio Beeps to Interactive Elements
+            attachSoundEvents();
+
+            // Touchscreen safe filtering (disables 3D physics tilt)
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            if (!isTouchDevice) {
+            if (!isTouchDevice && isDesktop) {
                 initTiltPhysics();
             }
         });
 
-        // 5. Advanced 3D Holographic Tilt Physics (Desktop Only)
+        // 8. Advanced 3D Holographic Tilt Physics (Desktop Only)
         function initTiltPhysics() {
             const cards = document.querySelectorAll('.tilt-card');
             cards.forEach(card => {
@@ -585,7 +778,7 @@
                     
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -10; // gentle angle
+                    const rotateX = ((y - centerY) / centerY) * -10; 
                     const rotateY = ((x - centerX) / centerX) * 10;
 
                     card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -597,7 +790,7 @@
             });
         }
 
-        // 6. Interactive Cyber Terminal Controller
+        // 9. Interactive Cyber Terminal Controller
         const terminalOverlay = document.getElementById('terminal-overlay');
         const terminalInput = document.getElementById('terminal-input');
         const terminalHistory = document.getElementById('terminal-history');
@@ -606,7 +799,11 @@
         function toggleTerminal() {
             terminalOverlay.classList.toggle('hidden');
             if (!terminalOverlay.classList.contains('hidden')) {
+                // Prevent background scrolling when terminal is active on mobile
+                document.body.classList.add('overflow-hidden');
                 terminalInput.focus();
+            } else {
+                document.body.classList.remove('overflow-hidden');
             }
         }
 
@@ -662,17 +859,18 @@
             }
         }
 
-        // 7. Mobile Navigation Drawer Controller
+        // 10. Mobile Navigation Drawer Controller (Fixed Positioning & Background Scroll Lock)
         const mobileMenu = document.getElementById('mobile-menu');
         const hamburgerIcon = document.getElementById('hamburger-icon');
 
         function toggleMobileMenu() {
             mobileMenu.classList.toggle('hidden');
             if (!mobileMenu.classList.contains('hidden')) {
-                // Change hamburger into close (X) icon using SVG transform
+                // Background scroll lock when menu is open on mobile
+                document.body.classList.add('overflow-hidden');
                 hamburgerIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`;
             } else {
-                // Back to standard hamburger
+                document.body.classList.remove('overflow-hidden');
                 hamburgerIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`;
             }
         }
