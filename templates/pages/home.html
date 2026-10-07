@@ -309,22 +309,6 @@
                     در بینوکس، نرم‌افزار را از ایده تا اجرا توسعه می‌دهیم؛ از طراحی و پیاده‌سازی سیستم‌های مدیریتی و سازمانی مانند CRM، DMS و ERP تا ساخت اپلیکیشن و طراحی وب‌سایت‌های حرفه‌ای. تیم فنی ما در تمام مسیر، از اولین مرحله تحلیل و طراحی تا توسعه، استقرار و پشتیبانی، همراه شماست.
                 </p>
                 
-                <!-- Live Core Engine Metrics Dashboard Visualizer -->
-                <div class="flex gap-6 items-center pt-2 text-[10px] font-mono text-slate-500 justify-center lg:justify-start">
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping"></span>
-                        <span>پینگ اتصال: <span id="metric-ping" class="text-brand-textPrimary font-bold">12ms</span></span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-brand-neonBlue"></span>
-                        <span>سرعت بارگذاری: <span class="text-brand-textPrimary font-bold">0.18s</span></span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
-                        <span>شاخص سئو گوگل: <span class="text-brand-accent font-bold">100/100</span></span>
-                    </div>
-                </div>
-
                 <div class="flex flex-col sm:flex-row gap-4 pt-3 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
                     <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
                         شروع ماجراجویی با بینوکس
@@ -617,17 +601,6 @@
                 }
             }
             requestAnimationFrame(step);
-        }
-
-        // Dynamic Live Core Metrics Dashboard Visualizer
-        function startMetricsVisualizer() {
-            const pingElement = document.getElementById('metric-ping');
-            if (!pingElement) return;
-
-            setInterval(() => {
-                const randomLatency = Math.floor(Math.random() * 4) + 10; 
-                pingElement.textContent = `${randomLatency}ms`;
-            }, 3000);
         }
 
         // Desktop Spotlight: Mouse Tracking
