@@ -574,39 +574,6 @@
             });
         }
 
-        // Holographic Text Decoder (Glitch Matrix Text Animation)
-        function decodeHolographicText(element, finalString, duration = 1500) {
-            const matrixChars = '01#X$/\\[]{}—=+*^?_@';
-            const length = finalString.length;
-            let startTime = null;
-
-            function step(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const elapsed = timestamp - startTime;
-                const progressRatio = Math.min(elapsed / duration, 1);
-
-                const decodedCount = Math.floor(progressRatio * length);
-                let currentDisplay = finalString.substring(0, decodedCount);
-
-                for (let i = decodedCount; i < length; i++) {
-                    if (finalString[i] === ' ' || finalString[i] === '\n') {
-                        currentDisplay += finalString[i];
-                    } else {
-                        currentDisplay += matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                    }
-                }
-
-                element.innerHTML = currentDisplay;
-
-                if (elapsed < duration) {
-                    requestAnimationFrame(step);
-                } else {
-                    element.innerHTML = finalString; 
-                }
-            }
-            requestAnimationFrame(step);
-        }
-
         // Desktop Spotlight: Mouse Tracking
         if (isDesktop) {
             const heroSection = document.getElementById('hero-section');
@@ -864,12 +831,6 @@
             initCanvas();
             initSpotlightCards();
             initCursorHoverEffects();
-
-            // Decode title with holographic sci-fi effect
-            const h1Title = document.querySelector('h1');
-            if (h1Title) {
-                decodeHolographicText(h1Title, "مهندسی نرم‌افزار<br>مقیاس‌پذیر برای کسب‌وکارهای مدرن", 2000);
-            }
 
             // Attach Audio Beeps to Interactive Elements
             attachSoundEvents();
