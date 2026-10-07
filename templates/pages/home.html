@@ -421,75 +421,71 @@
         </div>
     </section>
 
-    <!-- Section 3: Specs Section (IDEA 3: Interactive 3D Microchip Spec Cards) -->
+    <!-- Section 3: Technical Capabilities -->
     <section id="about" class="py-16 sm:py-24 border-t border-slate-900/60 relative z-10 scroll-mt-20 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
-                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">شناسنامه فنی بینوکس</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">توانمندی‌های فنی بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-brand-textSecondary text-xs px-4">استانداردهای مهندسی‌شده و جزئیات تکنولوژیک که تضمین‌کننده موفقیت هر پروژه است. (برای مشاهده کدهای بهینه‌سازی کلیک کنید)</p>
+                <p class="text-brand-textSecondary text-xs sm:text-sm px-4 leading-relaxed">توسعه نرم‌افزارهای اختصاصی و راهکارهای دیجیتال برای کسب‌وکارها؛ از تحلیل و طراحی معماری نرم‌افزار تا توسعه، استقرار و پشتیبانی.</p>
             </div>
 
-            <!-- Specs Grid (Flipping microchip style cards) -->
+            <!-- Technical Capabilities Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                <!-- Spec Card 1 (Speed) -->
-                <div onclick="toggleChipset(this, 'speed-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden">
+                <!-- Card 1: Software Architecture -->
+                <div onclick="toggleChipset(this, 'architecture-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden">
                     <div class="w-10 h-10 bg-emerald-500/10 text-brand-accent rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path></svg>
                     </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">سرعت لود اولترا-فست</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">کاهش بار محاسباتی دیتابیس در لایه‌های مدل جنگو جهت رسیدن به زمان پاسخ‌دهی شگفت‌انگیز مرورگر.</p>
-                    <div id="speed-code" class="hidden text-left font-mono text-[9px] text-brand-accent bg-black/60 p-2 rounded border border-slate-900">
-                        # Django Gzip Middleware<br>
-                        MIDDLEWARE = [<br>
-                        &nbsp;&nbsp;'django.middleware.gzip.GZipMiddleware',<br>
-                        &nbsp;&nbsp;...<br>
-                        ]
+                    <h3 class="text-sm font-bold text-brand-textPrimary">معماری نرم‌افزار مقیاس‌پذیر</h3>
+                    <p class="text-brand-textSecondary text-xs leading-relaxed">نرم‌افزارهای اختصاصی را با معماری اصولی و قابل توسعه طراحی می‌کنیم تا با رشد کاربران، داده‌ها و فرآیندهای کسب‌وکار، عملکرد، امنیت و پایداری سیستم حفظ شود.</p>
+                    <div id="architecture-code" class="hidden text-left font-mono text-[9px] text-brand-accent bg-black/60 p-2 rounded border border-slate-900">
+                        Architecture<br>
+                        Scalable Systems<br>
+                        Clean Architecture
                     </div>
                 </div>
 
-                <!-- Spec Card 2 (Security) -->
-                <div onclick="toggleChipset(this, 'sec-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-neonBlue/20 transition-all duration-300 relative overflow-hidden">
+                <!-- Card 2: Enterprise Systems -->
+                <div onclick="toggleChipset(this, 'systems-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-neonBlue/20 transition-all duration-300 relative overflow-hidden">
                     <div class="w-10 h-10 bg-blue-500/10 text-brand-neonBlue rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18v16H3zM7 8h4v3H7zm0 5h4v3H7zm6-5h4v8h-4z"></path></svg>
                     </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">دیواره امنیتی یکپارچه</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">پیاده‌سازی مکانیزم‌های دفاعی بومی جنگو در برابر تمام آسیب‌پذیری‌های امنیتی فهرست OWASP.</p>
-                    <div id="sec-code" class="hidden text-left font-mono text-[9px] text-brand-neonBlue bg-black/60 p-2 rounded border border-slate-900">
-                        # Security Headers<br>
-                        SECURE_BROWSER_XSS_FILTER = True<br>
-                        SECURE_CONTENT_TYPE_NOSNIFF = True<br>
-                        SESSION_COOKIE_SECURE = True
+                    <h3 class="text-sm font-bold text-brand-textPrimary">طراحی و توسعه سیستم‌های سازمانی</h3>
+                    <p class="text-brand-textSecondary text-xs leading-relaxed">راهکارهای نرم‌افزاری متناسب با فرآیندهای هر سازمان؛ از طراحی و توسعه سیستم‌های CRM، DMS و ERP تا سامانه‌های مدیریت منابع، مشتریان، اسناد و فرآیندهای داخلی.</p>
+                    <div id="systems-code" class="hidden text-left font-mono text-[9px] text-brand-neonBlue bg-black/60 p-2 rounded border border-slate-900">
+                        CRM / DMS / ERP<br>
+                        Business Systems<br>
+                        Custom Software
                     </div>
                 </div>
 
-                <!-- Spec Card 3 (SEO) -->
-                <div onclick="toggleChipset(this, 'seo-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-purple/20 transition-all duration-300 relative overflow-hidden">
+                <!-- Card 3: Applications and Web -->
+                <div onclick="toggleChipset(this, 'applications-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-purple/20 transition-all duration-300 relative overflow-hidden">
                     <div class="w-10 h-10 bg-purple-500/10 text-brand-purple rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zM9 7h6"></path></svg>
                     </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">الگوریتم اختصاصی سئو</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">رندر کامل تگ‌های ساختاریافته وب‌سایت در سمت سرور به همراه خروجی نقشه اتوماتیک برای خزنده‌ها.</p>
-                    <div id="seo-code" class="hidden text-left font-mono text-[9px] text-brand-purple bg-black/60 p-2 rounded border border-slate-900">
-                        # Sitemap Registration<br>
-                        from django.contrib.sitemaps import Sitemap<br>
-                        class StaticSitemap(Sitemap):<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;def items(self): return ['home']
+                    <h3 class="text-sm font-bold text-brand-textPrimary">توسعه اپلیکیشن و وب‌اپلیکیشن اختصاصی</h3>
+                    <p class="text-brand-textSecondary text-xs leading-relaxed">طراحی و توسعه اپلیکیشن، وب‌اپلیکیشن و APIهای اختصاصی با تمرکز بر تجربه کاربری، امنیت، عملکرد بالا و قابلیت توسعه در آینده.</p>
+                    <div id="applications-code" class="hidden text-left font-mono text-[9px] text-brand-purple bg-black/60 p-2 rounded border border-slate-900">
+                        Web Application<br>
+                        Mobile Application<br>
+                        REST API
                     </div>
                 </div>
 
-                <!-- Spec Card 4 (Docker) -->
-                <div onclick="toggleChipset(this, 'dock-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-pink-500/20 transition-all duration-300 relative overflow-hidden">
+                <!-- Card 4: Infrastructure and Deployment -->
+                <div onclick="toggleChipset(this, 'infrastructure-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-pink-500/20 transition-all duration-300 relative overflow-hidden">
                     <div class="w-10 h-10 bg-pink-500/10 text-pink-400 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 6a2 2 0 012-2h10a2 2 0 012 2v3H5V6zm0 7h14v5a2 2 0 01-2 2H7a2 2 0 01-2-2v-5z"></path></svg>
                     </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">زیرساخت داکرایز</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">بسته‌بندی کدهای پروژه در مخازن داکر به همراه ایزوله‌سازی سرویس‌ها برای انتقال بی‌دردسر به سرورهای ابری لینوکس.</p>
-                    <div id="dock-code" class="hidden text-left font-mono text-[9px] text-pink-400 bg-black/60 p-2 rounded border border-slate-900">
-                        # Dockerfile Blueprint<br>
-                        FROM python:3.11-alpine<br>
-                        COPY requirements.txt .<br>
-                        RUN pip install -r requirements.txt
+                    <h3 class="text-sm font-bold text-brand-textPrimary">استقرار، زیرساخت و پشتیبانی نرم‌افزار</h3>
+                    <p class="text-brand-textSecondary text-xs leading-relaxed">از آماده‌سازی سرور و محیط اجرا تا استقرار، مانیتورینگ، بهینه‌سازی و پشتیبانی، در تمام چرخه عمر نرم‌افزار همراه کسب‌وکار شما هستیم.</p>
+                    <div id="infrastructure-code" class="hidden text-left font-mono text-[9px] text-pink-400 bg-black/60 p-2 rounded border border-slate-900">
+                        Deployment<br>
+                        Monitoring<br>
+                        Infrastructure<br>
+                        Maintenance
                     </div>
                 </div>
             </div>
