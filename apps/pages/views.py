@@ -1,4 +1,9 @@
+import json
+
 from django.views.generic import TemplateView
+
+from .models import Project
+
 
 class HomeView(TemplateView):
     template_name = "pages/home.html"
@@ -8,8 +13,59 @@ class HomeView(TemplateView):
         context["seo_title"] = "طراحی سایت‌های پیشرفته با بینوکس (Binux) | بهینه‌سازی شده برای گوگل"
         context["seo_description"] = "آژانس دیجیتال بینوکس (Binux) ارائه دهنده خدمات طراحی سایت مدرن با جنگو، متمرکز بر سرعت بی‌نظیر و سئوی حداکثری."
         context["seo_keywords"] = "بینوکس, Binux, طراحی وب سایت, سئو سایت, جنگو لینوکس"
-        context["canonical_url"] = self.request.build_absolute_uri('/')
+        context["canonical_url"] = self.request.build_absolute_uri("/")
+        projects = list(
+            Project.objects.filter(is_published=True, is_featured=True)
+            .prefetch_related("gallery")
+        )
+        context["projects"] = projects
+        context["projects_payload"] = project_payload(projects)
         return context
+
+class ProjectsView(TemplateView):
+    template_name = "pages/projects.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["seo_title"] = "پروژه‌های انجام شده بینوکس | نمونه کارهای نرم‌افزاری"
+        context["seo_description"] = "فهرست پروژه‌های انجام شده بینوکس شامل ERP، CRM، اتوماسیون فروش، سامانه‌های سازمانی و وب‌سایت‌های تعاملی."
+        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        projects = list(
+            Project.objects.filter(is_published=True)
+            .prefetch_related("gallery")
+        )
+        context["projects"] = projects
+        context["projects_payload"] = project_payload(projects)
+        return context
+
+
+def project_payload(projects):
+    payload = []
+    for project in projects:
+        payload.append(
+            {
+                "slug": project.slug,
+                "title": project.title,
+                "category": project.category,
+                "short_description": project.short_description,
+                "description": project.description,
+                "technologies": project.technology_list,
+                "cover_image": project.cover_image.url if project.cover_image else None,
+                "project_url": project.project_url,
+                "project_url_label": project.project_url_label,
+                "images": [
+                    {
+                        "url": image.image.url,
+                        "alt": image.alt_text or image.caption or project.title,
+                        "caption": image.caption,
+                    }
+                    for image in project.gallery.filter(is_active=True)
+                    if image.image
+                ],
+            }
+        )
+    return payload
+
 
 class ElectronicsView(TemplateView):
     template_name = "pages/electronics.html"
