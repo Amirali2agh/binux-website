@@ -1,6 +1,4 @@
 from xml.etree.ElementTree import Element, SubElement, tostring
-from xml.sax.saxutils import escape
-
 from django.http import HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
@@ -58,7 +56,7 @@ def robots_txt(request):
             "User-agent: *",
             "Allow: /",
             "Disallow: /admin/",
-            f"Sitemap: {escape(sitemap_url)}",
+            f"Sitemap: {sitemap_url}",
             "",
         ]
     )
