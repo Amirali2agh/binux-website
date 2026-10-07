@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    {% if seo_keywords %}<meta name="keywords" content="{{ seo_keywords }}">{% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dot-grid { background-size: 32px 32px; background-image: radial-gradient(circle, rgba(255,255,255,.035) 1px, transparent 1px); }
+        .article-content h2 { margin-top: 2.2rem; margin-bottom: .8rem; font-size: 1.35rem; font-weight: 800; color: #f1f5f9; }
+        .article-content p, .article-content li { color: #94a3b8; line-height: 2; font-size: .95rem; }
+        .article-content ul { padding-right: 1.2rem; list-style: disc; }
+        .article-content strong { color: #cbd5e1; }
+    </style>
+    <script type="application/ld+json">{{ article_schema|safe }}</script>
+</head>
+<body class="bg-[#010206] text-slate-100 min-h-screen font-sans relative overflow-x-hidden">
+    <div class="absolute inset-0 dot-grid pointer-events-none"></div>
+
+    <header class="border-b border-slate-900/60 backdrop-blur-xl bg-[#010206]/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="tel:09120000000" class="border border-emerald-500/20 bg-emerald-500/5 hover:bg-[#10B981] hover:text-[#010206] px-5 py-2 rounded-lg text-xs font-bold transition-all">ارتباط با ما</a>
+            <nav class="hidden md:flex gap-8 text-xs font-semibold">
+                <a href="{% url 'pages:home' %}" class="text-slate-400 hover:text-[#10B981]">خانه</a>
+                <a href="{% url 'pages:home' %}#gallery" class="text-slate-400 hover:text-[#10B981]">پروژه‌ها</a>
+                <a href="{% url 'pages:electronics' %}" class="text-slate-400 hover:text-[#10B981]">بینوکس الکترونیک</a>
+                <a href="{% url 'pages:articles' %}" class="text-[#10B981]">مقاله‌های تکنولوژی</a>
+                <a href="{% url 'pages:about' %}" class="text-slate-400 hover:text-[#10B981]">درباره ما</a>
+            </nav>
+            <a href="{% url 'pages:home' %}" class="font-black text-sm tracking-wider text-slate-100"><span class="text-[#10B981]">&lt;</span>BINUX<span class="text-[#3B82F6]">/&gt;</span></a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-14 relative z-10">
+        <div class="mb-10">
+            <a href="{% url 'pages:articles' %}" class="text-xs text-emerald-400 hover:text-emerald-300">← بازگشت به مقاله‌ها</a>
+        </div>
+
+        <article class="bg-[#060913]/90 border border-slate-900 rounded-3xl p-6 sm:p-10">
+            <div class="flex flex-wrap gap-3 items-center text-xs text-slate-500 mb-6">
+                <span class="px-3 py-1 bg-emerald-500/10 text-[#10B981] border border-emerald-500/20 rounded-full">{{ article.category }}</span>
+                <span>{{ article.date }}</span>
+                <span>•</span>
+                <span>{{ article.read_time }}</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black leading-[1.45] text-slate-100 mb-6">{{ article.title }}</h1>
+            <p class="text-base sm:text-lg leading-8 text-slate-400 border-r-2 border-emerald-500/50 pr-4 mb-10">{{ article.summary }}</p>
+
+            <div class="article-content">
+                {{ article.content|safe }}
+            </div>
+        </article>
+
+        <section class="mt-10">
+            <h2 class="text-lg font-bold mb-5">مقاله‌های مرتبط</h2>
+            <div class="grid gap-4 sm:grid-cols-3">
+                {% for item in related_articles %}
+                <a href="{% url 'pages:article_detail' item.slug %}" class="block bg-[#060913]/80 border border-slate-900 hover:border-emerald-500/30 rounded-2xl p-5 transition-all">
+                    <span class="text-[10px] text-emerald-400">{{ item.category }}</span>
+                    <h3 class="mt-2 font-bold text-sm leading-7 text-slate-200">{{ item.title }}</h3>
+                    <p class="mt-2 text-xs text-slate-500 leading-6">{{ item.summary|truncatechars:110 }}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10">
+        <p>© ۲۰۲۶ گروه بینوکس (Binux). توسعه نرم‌افزار و راهکارهای دیجیتال.</p>
+    </footer>
+</body>
+</html>
