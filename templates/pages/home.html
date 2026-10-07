@@ -22,48 +22,28 @@
     <!-- Fonts: Premium Persian Typography -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 
-    <!-- Google Structured Data (JSON-LD Schema) for Advanced SEO Rich Snippets -->
+    <!-- Organization structured data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "آژانس دیجیتال بینوکس",
+      "@type": "Organization",
+      "@id": "{{ canonical_url }}#organization",
+      "name": "بینوکس",
       "alternateName": "Binux",
       "url": "{{ canonical_url }}",
-      "logo": "https://example.com/static/images/logo.png",
-      "image": "https://example.com/static/images/og-share.jpg",
-      "description": "{{ seo_description }}",
-      "telephone": "+989120000000",
-      "priceRange": "$$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "خیابان آزادی، پلاک ۱۰۰",
-        "addressLocality": "تهران",
-        "addressRegion": "تهران",
-        "postalCode": "1234567890",
-        "addressCountry": "IR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "35.6997",
-        "longitude": "51.3380"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Saturday",
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://github.com/binux",
-        "https://linkedin.com/company/binux"
-      ]
+      "description": "{{ seo_description }}"
+    }
+    </script>
+
+    <!-- WebSite structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "{{ canonical_url }}#website",
+      "url": "{{ canonical_url }}",
+      "name": "بینوکس | Binux",
+      "description": "{{ seo_description }}"
     }
     </script>
 

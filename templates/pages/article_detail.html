@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
+    <meta name="author" content="تیم مهندسی بینوکس">
     {% if seo_keywords %}<meta name="keywords" content="{{ seo_keywords }}">{% endif %}
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ canonical_url }}">
@@ -78,6 +79,7 @@
         })();
     </script>
     <script type="application/ld+json">{{ article_schema|safe }}</script>
+    <script type="application/ld+json">{{ breadcrumb_schema|safe }}</script>
 </head>
 <body class="min-h-screen relative overflow-x-hidden">
     <div class="progress" id="reading-progress"></div>
@@ -118,6 +120,16 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 relative z-10">
         <article>
+            <nav aria-label="مسیر صفحه" class="mb-6 text-[11px] text-slate-500">
+                <ol class="flex flex-wrap items-center gap-2">
+                    <li><a href="{% url 'pages:home' %}" class="hover:text-emerald-400 transition-colors">خانه</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li><a href="{% url 'pages:articles' %}" class="hover:text-emerald-400 transition-colors">مقاله‌های تکنولوژی</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-400" aria-current="page">{{ article.title }}</li>
+                </ol>
+            </nav>
+
             <header class="glass rounded-3xl overflow-hidden">
                 <div class="article-cover relative overflow-hidden p-6 sm:p-10">
                     <div class="absolute inset-0 opacity-65" style="background-image: linear-gradient(rgba(16,185,129,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,.065) 1px, transparent 1px); background-size: 24px 24px;"></div>
@@ -140,7 +152,7 @@
                         <span>•</span>
                         <span>{{ article.read_time }}</span>
                         <span>•</span>
-                        <span>بینوکس / مجله مهندسی</span>
+                        <span>نویسنده: <a href="{{ author_url }}" class="text-slate-400 hover:text-emerald-400 transition-colors">{{ author_name }}</a></span>
                     </div>
                     <h1 class="mt-5 text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.45] tracking-tight">{{ article.title }}</h1>
                     <p class="mt-6 max-w-4xl text-base sm:text-lg leading-9 text-slate-400 border-r-2 border-emerald-500/50 pr-4">{{ article.summary }}</p>
