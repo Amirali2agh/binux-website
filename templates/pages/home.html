@@ -247,7 +247,7 @@
             <!-- Main Navigation -->
             <nav class="hidden xl:flex gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-brand-textSecondary" dir="rtl">
                 <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
-                <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">پروژه‌های انجام شده</a>
+                <a href="{% url 'pages:home' %}#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">پروژه‌های انجام شده</a>
                 <a href="{% url 'pages:electronics' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">بینوکس الکترونیک</a>
                 <a href="{% url 'pages:articles' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">مقاله‌های تکنولوژی</a>
                 <a href="{% url 'pages:about' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
@@ -273,7 +273,7 @@
         <div id="mobile-menu" class="hidden xl:hidden fixed inset-x-0 top-[65px] h-[calc(100vh-65px)] bg-brand-dark/98 backdrop-blur-2xl z-40 px-8 py-12 flex flex-col justify-start gap-8 text-center shadow-2xl transition-all duration-300 overflow-y-auto">
             <button onclick="toggleTheme(); toggleMobileMenu();" class="text-sm font-semibold text-brand-textSecondary hover:text-brand-accent flex justify-center items-center gap-2 py-3 border-b border-slate-900/40">تغییر تم سایت</button>
             <a href="#" onclick="toggleMobileMenu()" class="text-base font-bold text-brand-accent tracking-wide">صفحه اصلی</a>
-            <a href="#gallery" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">پروژه‌های انجام شده</a>
+            <a href="{% url 'pages:home' %}#gallery" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">پروژه‌های انجام شده</a>
             <a href="{% url 'pages:electronics' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">بینوکس الکترونیک</a>
             <a href="{% url 'pages:articles' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">مقاله‌های تکنولوژی</a>
             <a href="{% url 'pages:about' %}" onclick="toggleMobileMenu()" class="text-base font-semibold text-brand-textSecondary hover:text-brand-accent transition-colors">درباره ما</a>
@@ -306,7 +306,7 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 pt-3 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
-                    <a href="#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
+                    <a href="{% url 'pages:home' %}#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
                         شروع ماجراجویی با بینوکس
                     </a>
                 </div>
@@ -350,67 +350,52 @@
     <!-- Section 2: Portfolio Gallery -->
     <section id="gallery" class="py-16 sm:py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
-                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">پروژه‌های متمایز بینوکس</h2>
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">پروژه‌های انجام شده بینوکس</h2>
                 <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-brand-textSecondary text-xs px-4">گلچینی از مدرن‌ترین پروژه‌های وب که مرزهای طراحی فرانت‌اَند و کارایی بک‌اَند را بازتعریف کرده‌اند.</p>
+                <p class="text-brand-textSecondary text-xs sm:text-sm px-4 leading-relaxed">نمونه‌ای از پروژه‌های نرم‌افزاری و وبی که در حوزه‌های سازمانی، CRM، اتوماسیون و تجربه دیجیتال توسعه داده شده‌اند.</p>
             </div>
 
-            <!-- Responsive Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-                <!-- Card 1 -->
-                <div class="spotlight-card group relative bg-slate-950/40 border border-slate-900/60 rounded-2xl p-5 sm:p-6 overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
+                {% for project in projects %}
+                <button type="button" data-project-slug="{{ project.slug }}" onclick="openProjectModal('{{ project.slug }}')" class="spotlight-card group relative text-right w-full bg-slate-950/40 border border-slate-900/60 rounded-2xl p-4 sm:p-5 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 transition-all duration-300 hover:-translate-y-1">
                     <div class="spotlight-border absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(16, 185, 129, 0.4), transparent 80%); z-index: -1;"></div>
-                    <div class="spotlight-layer absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(16, 185, 129, 0.08), transparent 80%);"></div>
-                    
-                    <div class="relative space-y-4 z-10 pointer-events-none">
-                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-accent/30 transition-colors">
-                            <span class="text-xs font-mono text-brand-accent tracking-widest">[// E-COMMERCE ENGINE]</span>
+                    <div class="relative z-10 space-y-4">
+                        {% if project.cover_image %}
+                            <div class="h-40 sm:h-44 w-full bg-brand-dark rounded-xl border border-slate-800 overflow-hidden">
+                                <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                        {% else %}
+                            <div class="h-40 sm:h-44 w-full bg-gradient-to-br from-brand-dark via-slate-900 to-brand-card rounded-xl border border-slate-800 flex items-center justify-center overflow-hidden">
+                                <div class="text-center px-3">
+                                    <div class="text-[9px] font-mono text-brand-accent tracking-widest mb-2">[// {{ project.category|upper }}]</div>
+                                    <div class="text-sm font-bold text-slate-200">{{ project.title }}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <div class="text-[10px] text-brand-accent font-semibold mb-1">{{ project.category }}</div>
+                            <h3 class="text-base sm:text-lg font-bold text-brand-textPrimary">{{ project.title }}</h3>
                         </div>
-                        <h3 class="text-base sm:text-lg font-bold text-slate-100">پلتفرم نکسوس شاپ</h3>
-                        <p class="text-brand-textSecondary text-xs leading-relaxed">فروشگاه فوق‌سریع نسل جدید به همراه مدیریت پویا و پیشرفته انبارداری و اتصال امن به درگاه‌های بین‌المللی.</p>
-                        <div class="flex gap-2 pt-1">
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Django Rest</span>
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">PostgreSQL</span>
+                        <p class="text-brand-textSecondary text-xs leading-6 line-clamp-3">{{ project.short_description }}</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            {% for tech in project.technology_list|slice:":3" %}
+                                <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[9px] text-slate-400 font-mono">{{ tech }}</span>
+                            {% endfor %}
                         </div>
+                        <div class="pt-1 text-xs font-bold text-brand-accent group-hover:text-white transition-colors">مشاهده آلبوم و جزئیات ←</div>
                     </div>
-                </div>
+                </button>
+                {% empty %}
+                    <div class="md:col-span-2 lg:col-span-4 text-center py-12 text-sm text-slate-500">هنوز پروژه‌ای برای نمایش ثبت نشده است.</div>
+                {% endfor %}
+            </div>
 
-                <!-- Card 2 -->
-                <div class="spotlight-card group relative bg-slate-950/40 border border-slate-900/60 rounded-2xl p-5 sm:p-6 overflow-hidden">
-                    <div class="spotlight-border absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(59, 130, 246, 0.4), transparent 80%); z-index: -1;"></div>
-                    <div class="spotlight-layer absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(59, 130, 246, 0.08), transparent 80%);"></div>
-                    
-                    <div class="relative space-y-4 z-10 pointer-events-none">
-                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-neonBlue/30 transition-colors">
-                            <span class="text-xs font-mono text-brand-neonBlue tracking-widest">[// SAAS REALTIME DATA]</span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-bold text-slate-100">داشبورد آماری بینوفلو</h3>
-                        <p class="text-brand-textSecondary text-xs leading-relaxed">بستر مانیتورینگ داده‌های کلان با پروتکل ارتباطی ریل‌تایم و امنیت پیشرفته توزیع اطلاعات بصورت گرافیک زنده.</p>
-                        <div class="flex gap-2 pt-1">
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">WebSockets</span>
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-slate-400 font-mono">Tailwind v4</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="spotlight-card group relative bg-slate-950/40 border border-slate-900/60 rounded-2xl p-5 sm:p-6 overflow-hidden">
-                    <div class="spotlight-border absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(139, 92, 246, 0.4), transparent 80%); z-index: -1;"></div>
-                    <div class="spotlight-layer absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(139, 92, 246, 0.08), transparent 80%);"></div>
-                    
-                    <div class="relative space-y-4 z-10 pointer-events-none">
-                        <div class="h-40 sm:h-44 w-full bg-brand-dark/90 rounded-xl border border-slate-900 flex items-center justify-center relative overflow-hidden group-hover:border-brand-purple/30 transition-colors">
-                            <span class="text-xs font-mono text-brand-purple tracking-widest">[// HEADLESS WEB APP]</span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-bold text-slate-100">آرت استودیو سی‌ام‌اس</h3>
-                        <p class="text-brand-textSecondary text-xs leading-relaxed">وب‌سایت اختصاصی کانون طراحان با ساختار مدیریت محتوای بدون‌سرور و رندرهای لحظه‌ای گرافیکی.</p>
-                        <div class="flex gap-2 pt-1">
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">Headless CMS</span>
-                            <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[10px] text-brand-textSecondary font-mono">Django Rest</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="mt-10 sm:mt-12 text-center">
+                <a href="{% url 'pages:projects' %}" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-800 text-xs font-bold text-slate-300 hover:border-brand-accent/30 hover:text-brand-accent transition-all">
+                    ادامه و مشاهده همه پروژه‌ها
+                    <span aria-hidden="true">←</span>
+                </a>
             </div>
         </div>
     </section>
@@ -490,6 +475,10 @@
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
         <p class="px-4">© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
+
+    {{ projects_payload|json_script:"portfolio-projects-data" }}
+    {% include "pages/partials/project_modal.html" %}
+    <script src="{% static 'js/projects.js' %}"></script>
 
     <!-- Futuristic Interactive Javascript Features -->
     <script>
