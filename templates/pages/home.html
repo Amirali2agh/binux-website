@@ -232,33 +232,9 @@
 
     <!-- Header / Navbar (Futuristic Glassmorphism) -->
     <header class="border-b border-slate-900/60 backdrop-blur-xl bg-brand-dark/40 sticky top-0 z-50 transition-colors duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            
-            <!-- Day/Night Theme Toggler & Eye-Catching CTA (Top Left) -->
-            <div class="flex items-center gap-3">
-                <button onclick="toggleTheme()" class="text-brand-textSecondary hover:text-brand-accent p-2 rounded-lg border border-slate-900/50 bg-brand-card/60 backdrop-blur-md focus:outline-none transition-all duration-300" aria-label="تغییر تم سایت">
-                    <svg id="theme-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
-                    <svg id="theme-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-
-                <!-- Highly Eye-Catching Pulsing Contact Button -->
-                <a href="tel:09120000000" class="relative px-5 py-2 sm:px-6 sm:py-2.5 rounded-lg border border-brand-accent bg-brand-dark hover:border-brand-accent text-slate-100 text-xs font-bold transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.35)] animate-pulse hover:animate-none group overflow-hidden">
-                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
-                    <span class="relative z-10">ارتباط با ما</span>
-                </a>
-            </div>
-
-            <!-- Custom Ordered Navigation Links (Desktop only) -->
-            <nav class="hidden xl:flex gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-brand-textSecondary">
-                <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
-                <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">پروژه‌های انجام شده</a>
-                <a href="{% url 'pages:electronics' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">بینوکس الکترونیک</a>
-                <a href="{% url 'pages:articles' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">مقاله‌های تکنولوژی</a>
-                <a href="{% url 'pages:about' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
-            </nav>
-
-            <!-- Logo with dynamic fallback -->
-            <div class="flex items-center gap-3 relative group">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between" dir="ltr">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 relative group" dir="rtl">
                 <div class="absolute -inset-2 bg-brand-neonBlue/10 rounded-full blur-xl group-hover:bg-brand-accent/20 transition-all duration-500"></div>
                 <img src="{% static 'images/logo.png' %}" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';" alt="بینوکس لوگو" class="h-8 sm:h-9 w-auto relative z-10 hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
                 
@@ -266,7 +242,25 @@
                     <span class="text-brand-accent">&lt;</span>BINUX<span class="text-brand-neonBlue">/&gt;</span>
                 </div>
             </div>
-
+            <!-- Main Navigation -->
+            <nav class="hidden xl:flex gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-brand-textSecondary" dir="rtl">
+                <a href="#" class="text-brand-accent border-b-2 border-brand-accent pb-1">صفحه اصلی</a>
+                <a href="#gallery" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">پروژه‌های انجام شده</a>
+                <a href="{% url 'pages:electronics' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">بینوکس الکترونیک</a>
+                <a href="{% url 'pages:articles' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">مقاله‌های تکنولوژی</a>
+                <a href="{% url 'pages:about' %}" class="hover:text-brand-accent transition-all duration-200 hover:-translate-y-0.5">درباره ما</a>
+            </nav>
+            <!-- Header Actions: Contact + Theme -->
+            <div class="flex items-center gap-3" dir="rtl">
+                <button onclick="toggleTheme()" class="text-brand-textSecondary hover:text-brand-accent p-2 rounded-lg border border-slate-900/50 bg-brand-card/60 backdrop-blur-md focus:outline-none transition-all duration-300" aria-label="تغییر تم سایت">
+                    <svg id="theme-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linecap="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
+                    <svg id="theme-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <a href="tel:09120000000" class="relative px-5 py-2 sm:px-6 sm:py-2.5 rounded-lg border border-brand-accent bg-brand-dark hover:border-brand-accent text-slate-100 text-xs font-bold transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.35)] animate-pulse hover:animate-none group overflow-hidden">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-accent to-brand-neonBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
+                    <span class="relative z-10">ارتباط با ما</span>
+                </a>
+            </div>
             <!-- Hamburger Button (Mobile Trigger) -->
             <button onclick="toggleMobileMenu()" class="xl:hidden text-brand-textSecondary hover:text-brand-accent focus:outline-none z-50">
                 <svg id="hamburger-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
