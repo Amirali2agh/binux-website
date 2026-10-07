@@ -735,6 +735,8 @@ class ArticleDetailView(TemplateView):
         context["seo_description"] = article["summary"]
         context["seo_keywords"] = article["keywords"]
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["author_name"] = "تیم مهندسی بینوکس"
+        context["author_url"] = self.request.build_absolute_uri("/about/")
 
         related = [
             item for item in ARTICLES
@@ -749,6 +751,34 @@ class ArticleDetailView(TemplateView):
 
         article_body = re.sub(r"<[^>]+>", " ", article["content"])
         article_body = re.sub(r"\s+", " ", article_body).strip()
+        context["breadcrumb_schema"] = json.dumps(
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "خانه",
+                        "item": self.request.build_absolute_uri("/"),
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "مقاله‌های تکنولوژی",
+                        "item": self.request.build_absolute_uri("/articles/"),
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": article["title"],
+                        "item": context["canonical_url"],
+                    },
+                ],
+            },
+            ensure_ascii=False,
+        )
+
         context["article_schema"] = json.dumps(
             {
                 "@context": "https://schema.org",
@@ -763,8 +793,8 @@ class ArticleDetailView(TemplateView):
                 },
                 "author": {
                     "@type": "Organization",
-                    "name": "Binux",
-                    "url": self.request.build_absolute_uri("/about/"),
+                    "name": context["author_name"],
+                    "url": context["author_url"],
                 },
                 "publisher": {
                     "@type": "Organization",
