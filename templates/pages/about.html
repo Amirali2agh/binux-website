@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <meta name="robots" content="{{ seo_robots }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:site_name" content="بینوکس | Binux">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:alt" content="بینوکس | Binux">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -13,6 +30,8 @@
             background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
         }
     </style>
+    <script type="application/ld+json">{{ webpage_schema|safe }}</script>
+    <script type="application/ld+json">{{ organization_schema|safe }}</script>
 </head>
 <body class="bg-[#010206] text-slate-100 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden select-none">
     
@@ -30,7 +49,7 @@
             
             <nav class="hidden md:flex gap-8 text-xs font-semibold">
                 <a href="{% url 'pages:home' %}" class="text-slate-400 hover:text-[#10B981]">خانه</a>
-                <a href="{% url 'pages:home' %}#gallery" class="text-slate-400 hover:text-[#10B981]">پروژه‌ها</a>
+                <a href="{% url 'pages:projects' %}" class="text-slate-400 hover:text-[#10B981]">پروژه‌ها</a>
                 <a href="{% url 'pages:electronics' %}" class="text-slate-400 hover:text-[#10B981]">بینوکس الکترونیک</a>
                 <a href="{% url 'pages:articles' %}" class="text-slate-400 hover:text-[#10B981]">مقاله‌های تکنولوژی</a>
                 <a href="{% url 'pages:about' %}" class="text-[#10B981] border-b-2 border-[#10B981] pb-1">درباره ما</a>
