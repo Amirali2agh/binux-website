@@ -45,7 +45,7 @@ class Project(models.Model):
         return [item.strip() for item in self.technologies.split(",") if item.strip()]
 
     def get_absolute_url(self):
-        return reverse("pages:projects")
+        return reverse("pages:project_detail", kwargs={"slug": self.slug})
 
 
 class ProjectImage(models.Model):
