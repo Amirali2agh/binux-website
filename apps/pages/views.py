@@ -779,6 +779,34 @@ class ProjectsView(TemplateView):
         return context
 
 
+def project_payload(projects):
+    payload = []
+    for project in projects:
+        payload.append(
+            {
+                "slug": project.slug,
+                "title": project.title,
+                "category": project.category,
+                "short_description": project.short_description,
+                "description": project.description,
+                "technologies": project.technology_list,
+                "cover_image": project.cover_image.url if project.cover_image else None,
+                "project_url": project.project_url,
+                "project_url_label": project.project_url_label,
+                "images": [
+                    {
+                        "url": image.image.url,
+                        "alt": image.alt_text or image.caption or project.title,
+                        "caption": image.caption,
+                    }
+                    for image in project.gallery.filter(is_active=True)
+                    if image.image
+                ],
+            }
+        )
+    return payload
+
+
 class ProjectDetailView(TemplateView):
     template_name = "pages/project_detail.html"
 
@@ -905,59 +933,6 @@ class ArticlesView(TemplateView):
             ),
             ensure_ascii=False,
         )
-        return context
-
-
-
-def project_payload(projects):
-    payload = []
-    for project in projects:
-        payload.append(
-            {
-                "slug": project.slug,
-                "title": project.title,
-                "category": project.category,
-                "short_description": project.short_description,
-                "description": project.description,
-                "technologies": project.technology_list,
-                "cover_image": project.cover_image.url if project.cover_image else None,
-                "project_url": project.project_url,
-                "project_url_label": project.project_url_label,
-                "images": [
-                    {
-                        "url": image.image.url,
-                        "alt": image.alt_text or image.caption or project.title,
-                        "caption": image.caption,
-                    }
-                    for image in project.gallery.filter(is_active=True)
-                    if image.image
-                ],
-            }
-        )
-    return payload
-
-
-class ElectronicsView(TemplateView):
-    template_name = "pages/electronics.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["seo_title"] = "بینوکس الکترونیک | آزمایشگاه توسعه سخت‌افزار"
-        context["seo_description"] = "بخش مهندسی الکترونیک و اینترنت اشیاء (IoT) گروه بینوکس. به زودی از پلتفرم جدید سخت‌افزاری رونمایی خواهد شد."
-        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
-        return context
-
-
-class ArticlesView(TemplateView):
-    template_name = "pages/articles.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["seo_title"] = "مقاله‌های تکنولوژی، سئو و توسعه نرم‌افزار | وبلاگ بینوکس"
-        context["seo_description"] = "مقالات کاربردی بینوکس درباره سئو سایت، طراحی سایت، سرعت وب، CRM، ERP و توسعه نرم‌افزار با Django و Python."
-        context["seo_keywords"] = ", ".join(article["keywords"] for article in ARTICLES)
-        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
-        context["articles"] = ARTICLES
         return context
 
 
