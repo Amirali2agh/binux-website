@@ -104,9 +104,9 @@
             {% if projects %}
                 <!-- Featured Project -->
                 {% with project=projects.0 %}
-                <button type="button"
+                <a href="{% url 'pages:project_detail' project.slug %}"
                         data-project-slug="{{ project.slug }}"
-                        onclick="openProjectModal('{{ project.slug }}')"
+                        onclick="event.preventDefault(); openProjectModal('{{ project.slug }}')"
                         class="group relative block w-full text-right overflow-hidden rounded-[2rem] border border-slate-900/80 bg-slate-950/40 hover:border-brand-accent/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(0,0,0,0.32)]">
                     <div class="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] min-h-[480px]">
                         <div class="relative min-h-[280px] lg:min-h-full overflow-hidden bg-brand-dark">
