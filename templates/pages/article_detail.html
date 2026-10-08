@@ -7,14 +7,23 @@
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
     <meta name="author" content="تیم مهندسی بینوکس">
-    {% if seo_keywords %}{% endif %}
     <meta name="robots" content="{{ seo_robots }}">
     <link rel="canonical" href="{{ canonical_url }}">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="بینوکس | Binux">
+    <meta property="og:locale" content="fa_IR">
     <meta property="og:title" content="{{ seo_title }}">
     <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:alt" content="{{ article.title }} | بینوکس">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ og_image }}">
     <meta property="article:published_time" content="{{ article.date_iso }}">
+    <meta property="article:modified_time" content="{{ article.date_iso }}">
+    <meta property="article:section" content="{{ article.category }}">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css">
