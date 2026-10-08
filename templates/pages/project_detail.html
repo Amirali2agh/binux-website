@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <meta name="robots" content="{{ seo_robots }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:site_name" content="بینوکس | Binux">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:alt" content="{{ project.title }} | بینوکس">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: 'var(--bg-dark)',
+                            card: 'var(--bg-card)',
+                            textPrimary: 'var(--text-primary)',
+                            textSecondary: 'var(--text-secondary)',
+                            accent: '#10B981',
+                            neonBlue: '#3B82F6',
+                            purple: '#8B5CF6'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        :root {
+            --bg-dark: #010206;
+            --bg-card: #060913;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+        :root.light {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+        }
+        .dot-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle, black 40%, transparent 95%);
+            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
+        }
+        :root.light .dot-grid { background-image: radial-gradient(circle, rgba(15,23,42,.04) 1px, transparent 1px); }
+        .project-content { color: var(--text-secondary); }
+        .project-content p { margin-bottom: 1rem; line-height: 2; }
+        .project-content h2 { margin-top: 2rem; margin-bottom: .75rem; color: var(--text-primary); font-size: 1.35rem; font-weight: 900; }
+        .project-content ul { margin: 1rem 0 1.5rem; padding-right: 1.5rem; list-style: disc; }
+        .project-content li { margin-bottom: .45rem; line-height: 1.9; }
+    </style>
+    <script>
+        (function () {
+            if (localStorage.getItem('theme') === 'light' || localStorage.getItem('binux-theme') === 'light') {
+                document.documentElement.classList.add('light');
+            }
+        })();
+    </script>
+    <script type="application/ld+json">{{ project_schema|safe }}</script>
+    <script type="application/ld+json">{{ breadcrumb_schema|safe }}</script>
+</head>
+<body class="bg-brand-dark text-brand-textPrimary font-sans min-h-screen relative overflow-x-hidden transition-colors duration-500">
+    <div class="absolute inset-0 dot-grid pointer-events-none"></div>
+
+    <header class="sticky top-0 z-50 border-b border-slate-900/60 bg-brand-dark/75 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+            <a href="{% url 'pages:projects' %}" class="flex items-center gap-3" aria-label="بازگشت به پروژه‌های انجام شده">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center font-black">&lt;/&gt;</div>
+                <div>
+                    <div class="text-sm font-black">پروژه‌های انجام شده</div>
+                    <div class="text-[10px] text-slate-500">Binux Portfolio</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="toggleProjectTheme()" class="w-10 h-10 rounded-xl border border-slate-800 bg-brand-card/60 text-slate-400 hover:text-brand-accent transition-all" aria-label="تغییر تم">
+                    <span id="project-theme-icon">☾</span>
+                </button>
+                <a href="{% url 'pages:about' %}" class="hidden sm:inline-flex items-center px-4 py-2.5 rounded-xl border border-slate-800 text-xs font-bold text-slate-300 hover:border-brand-accent/30 hover:text-brand-accent transition-all">درخواست مشاوره</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 py-10 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <nav aria-label="مسیر صفحه" class="mb-6 text-[11px] text-slate-500">
+                <ol class="flex flex-wrap items-center gap-2">
+                    <li><a href="{% url 'pages:home' %}" class="hover:text-brand-accent">خانه</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li><a href="{% url 'pages:projects' %}" class="hover:text-brand-accent">پروژه‌ها</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-400" aria-current="page">{{ project.title }}</li>
+                </ol>
+            </nav>
+
+            <article class="rounded-3xl overflow-hidden border border-slate-900/80 bg-brand-card/70 backdrop-blur-xl">
+                {% if project.cover_image %}
+                    <div class="relative h-[260px] sm:h-[420px] overflow-hidden bg-brand-dark">
+                        <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <div class="absolute top-5 left-5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] font-mono text-slate-300">BINUX CASE STUDY</div>
+                    </div>
+                {% else %}
+                    <div class="relative h-[260px] sm:h-[360px] bg-gradient-to-br from-brand-dark via-slate-900 to-brand-card flex items-center justify-center">
+                        <div class="text-center px-6">
+                            <div class="text-[10px] font-mono tracking-[.2em] text-brand-accent mb-3">[// {{ project.category|upper }}]</div>
+                            <div class="text-2xl sm:text-4xl font-black">{{ project.title }}</div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center gap-3 text-[10px] text-slate-500">
+                        <span class="text-brand-accent font-semibold">{{ project.category }}</span>
+                        <span>•</span>
+                        <span>نمونه کار بینوکس</span>
+                    </div>
+
+                    <h1 class="mt-4 text-3xl sm:text-5xl font-black tracking-tight leading-[1.35]">{{ project.title }}</h1>
+                    <p class="mt-5 text-sm sm:text-base leading-8 text-brand-textSecondary max-w-4xl">{{ project.short_description }}</p>
+
+                    <div class="mt-7 flex flex-wrap gap-2">
+                        {% for tech in project.technology_list %}
+                            <span class="px-2.5 py-1.5 rounded-lg border border-slate-800 bg-black/15 text-[9px] text-slate-400 font-mono">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-slate-900/70 grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10">
+                        <div class="project-content">
+                            {{ project.description|safe }}
+                        </div>
+
+                        <aside class="space-y-5">
+                            <div class="rounded-2xl border border-slate-900 bg-black/15 p-5">
+                                <div class="text-[9px] font-mono tracking-[.2em] text-slate-500">PROJECT INFO</div>
+                                <div class="mt-4 space-y-4 text-xs">
+                                    <div>
+                                        <div class="text-slate-600">دسته‌بندی</div>
+                                        <div class="mt-1 font-bold text-slate-300">{{ project.category }}</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-slate-600">فناوری‌ها</div>
+                                        <div class="mt-1 text-slate-300 leading-7">{{ project.technologies }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if project.project_url %}
+                            <a href="{{ project.project_url }}" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border border-brand-accent/20 bg-brand-accent/5 p-5 text-xs font-bold text-brand-accent hover:bg-brand-accent hover:text-brand-dark transition-all">
+                                {{ project.project_url_label|default:"مشاهده پروژه" }} ←
+                            </a>
+                            {% endif %}
+                        </aside>
+                    </div>
+                </div>
+            </article>
+
+            {% with images=project.gallery.all %}
+            {% if images %}
+            <section class="mt-10" aria-labelledby="project-gallery-title">
+                <div class="flex items-end justify-between gap-4 mb-5">
+                    <div>
+                        <p class="text-[10px] text-brand-accent font-bold tracking-[.18em]">PROJECT GALLERY</p>
+                        <h2 id="project-gallery-title" class="mt-2 text-xl sm:text-2xl font-black">آلبوم تصاویر پروژه</h2>
+                    </div>
+                    <a href="{% url 'pages:projects' %}" class="text-xs font-bold text-slate-500 hover:text-brand-accent">همه پروژه‌ها ←</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {% for image in images %}
+                        {% if image.is_active %}
+                        <figure class="rounded-2xl overflow-hidden border border-slate-900 bg-brand-card/60">
+                            <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:project.title }}" loading="lazy" class="w-full aspect-[4/3] object-cover">
+                            {% if image.caption %}
+                                <figcaption class="px-4 py-3 text-[10px] text-slate-500">{{ image.caption }}</figcaption>
+                            {% endif %}
+                        </figure>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            {% endwith %}
+
+            <section class="mt-10 rounded-2xl border border-brand-accent/15 bg-brand-accent/[0.03] p-6 sm:p-8">
+                <h2 class="text-xl font-black">برای پروژه مشابه، با بینوکس صحبت کنید</h2>
+                <p class="mt-2 text-sm text-slate-400 leading-8">از تحلیل و معماری تا توسعه، استقرار و پشتیبانی؛ راهکار را متناسب با فرایند واقعی کسب‌وکار شما طراحی می‌کنیم.</p>
+                <div class="mt-5 flex flex-col sm:flex-row gap-3">
+                    <a href="{% url 'pages:about' %}" class="inline-flex justify-center px-5 py-3 rounded-xl bg-brand-accent text-brand-dark font-black text-xs">درخواست مشاوره</a>
+                    <a href="{% url 'pages:articles' %}" class="inline-flex justify-center px-5 py-3 rounded-xl border border-slate-800 text-slate-300 font-bold text-xs hover:border-brand-accent/25 hover:text-brand-accent transition-all">مقالات فنی بینوکس</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10">
+        <p>© ۲۰۲۶ گروه بینوکس (Binux). توسعه نرم‌افزار و راهکارهای دیجیتال.</p>
+    </footer>
+
+    <script>
+        function toggleProjectTheme() {
+            document.documentElement.classList.toggle('light');
+            const light = document.documentElement.classList.contains('light');
+            localStorage.setItem('theme', light ? 'light' : 'dark');
+            document.getElementById('project-theme-icon').textContent = light ? '☀' : '☾';
+        }
+        if (document.documentElement.classList.contains('light')) {
+            document.getElementById('project-theme-icon').textContent = '☀';
+        }
+    </script>
+</body>
+</html>
