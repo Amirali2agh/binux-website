@@ -10,7 +10,6 @@ from .views import ARTICLES
 SITEMAP_PATHS = (
     ("pages:home", None),
     ("pages:projects", None),
-    ("pages:electronics", None),
     ("pages:articles", None),
     ("pages:about", None),
 )
