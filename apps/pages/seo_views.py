@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.decorators.http import require_GET
 
+from .models import Project
 from .views import ARTICLES
 
 
@@ -32,6 +33,17 @@ def sitemap_xml(request):
             loc,
             "loc",
         ).text = _absolute_url(request, reverse(url_name))
+
+    for project in Project.objects.filter(is_published=True):
+        entry = SubElement(urlset, "url")
+        SubElement(
+            entry,
+            "loc",
+        ).text = _absolute_url(
+            request,
+            reverse("pages:project_detail", kwargs={"slug": project.slug}),
+        )
+        SubElement(entry, "lastmod").text = project.updated_at.date().isoformat()
 
     for article in ARTICLES:
         entry = SubElement(urlset, "url")
