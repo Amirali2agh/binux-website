@@ -506,7 +506,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
                 {% for project in projects %}
-                <a href="{% url 'pages:project_detail' project.slug %}" data-project-slug="{{ project.slug }}" onclick="event.preventDefault(); openProjectModal('{{ project.slug }}')" class="spotlight-card group relative text-right w-full bg-slate-950/40 border border-slate-900/60 rounded-2xl p-4 sm:p-5 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/20 hover:bg-slate-950/55 hover:shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
+                <a href="{% url 'pages:project_detail' project.slug %}" data-project-slug="{{ project.slug }}" onclick="event.preventDefault(); openProjectModal('{{ project.slug }}')" class="no-underline spotlight-card group relative text-right w-full bg-slate-950/40 border border-slate-900/60 rounded-2xl p-4 sm:p-5 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/20 hover:bg-slate-950/55 hover:shadow-[0_18px_45px_rgba(0,0,0,0.24)]">
                     <div class="spotlight-border absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(16, 185, 129, 0.4), transparent 80%); z-index: -1;"></div>
                     <div class="relative z-10 space-y-4">
                         {% if project.cover_image %}
