@@ -265,188 +265,173 @@
         </div>
     </header>
 
-    <!-- Section 1: Interactive Hero Section -->
-    <section id="hero-section" class="min-h-[88vh] flex items-center py-8 sm:py-12 lg:py-24 relative z-10 cursor-spotlight-bg transition-all duration-150">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full relative z-10">
-            
-            <!-- Right Column: Text & CTA -->
-            <div class="space-y-5 text-center lg:text-right">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 text-brand-accent text-[10px] sm:text-[11px] font-semibold rounded-full border border-brand-accent/20">
-                    <span class="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping"></span>
+    <!-- Section 1: Premium Engineering Hero -->
+    <section id="hero-section" class="min-h-[88vh] flex items-center py-10 sm:py-14 lg:py-20 relative z-10 cursor-spotlight-bg transition-all duration-150">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full relative z-10">
+
+            <!-- Right Column: Brand Message & CTA -->
+            <div class="space-y-6 text-center lg:text-right order-1 lg:order-2">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.025] text-brand-accent text-[10px] sm:text-[11px] font-semibold rounded-full border border-white/[0.07] backdrop-blur-md">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-60 animate-ping"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+                    </span>
                     <span>راهکارهای نرم‌افزاری، از ایده تا اجرا</span>
                 </div>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.25] tracking-[-0.015em] text-brand-textPrimary">
-                    <span class="block">مهندسی نرم‌افزار مقیاس‌پذیر</span>
-                    <span class="block mt-1 text-slate-300">
-                        برای کسب‌وکارهای مدرن
-                    </span>
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] font-black leading-[1.18] tracking-[-0.035em] text-brand-textPrimary">
+                    <span class="block">مهندسی نرم‌افزار</span>
+                    <span class="block mt-1 bg-gradient-to-l from-emerald-300 via-brand-accent to-cyan-300 bg-clip-text text-transparent">مقیاس‌پذیر.</span>
+                    <span class="block mt-2 text-slate-300/90 font-semibold text-[0.72em] tracking-[-0.02em]">برای کسب‌وکارهای مدرن</span>
                 </h1>
-                <p class="text-brand-textSecondary text-xs sm:text-sm md:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                    در بینوکس، نرم‌افزار را از ایده تا اجرا توسعه می‌دهیم؛ از طراحی و پیاده‌سازی سیستم‌های مدیریتی و سازمانی مانند CRM، DMS و ERP تا ساخت اپلیکیشن و طراحی وب‌سایت‌های حرفه‌ای. تیم فنی ما در تمام مسیر، از اولین مرحله تحلیل و طراحی تا توسعه، استقرار و پشتیبانی، همراه شماست.
+
+                <p class="text-brand-textSecondary text-xs sm:text-sm md:text-base max-w-xl mx-auto lg:mx-0 leading-[2]">
+                    در بینوکس، نرم‌افزار را از ایده تا اجرا توسعه می‌دهیم؛ از طراحی سیستم‌های مدیریتی و سازمانی تا ساخت اپلیکیشن و وب‌سایت‌های حرفه‌ای، با تمرکز روی معماری درست، عملکرد بالا و قابلیت رشد.
                 </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 pt-3 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
-                    <a href="{% url 'pages:home' %}#gallery" class="relative group overflow-hidden bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:shadow-emerald-500/30 transform hover:-translate-y-1">
-                        شروع ماجراجویی با بینوکس
+
+                <div class="flex flex-col sm:flex-row gap-3.5 pt-2 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
+                    <a href="{% url 'pages:home' %}#gallery" class="group inline-flex items-center justify-center gap-2 bg-brand-accent text-brand-dark font-extrabold text-center px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl shadow-lg shadow-emerald-500/15 text-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-emerald-500/30">
+                        <span>شروع همکاری با بینوکس</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                    <a href="{% url 'pages:home' %}#gallery" class="inline-flex items-center justify-center px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl border border-white/[0.08] bg-white/[0.02] text-brand-textSecondary hover:text-brand-textPrimary hover:border-brand-accent/30 hover:bg-white/[0.04] text-xs font-bold transition-all duration-300">
+                        مشاهده پروژه‌ها
                     </a>
                 </div>
-            </div>
 
-            <!-- Left Column: Code Editor Card -->
-            <div class="w-full max-w-xl mx-auto lg:mr-auto relative group">
-                <div class="absolute -inset-2 bg-gradient-to-r from-brand-accent via-brand-neonBlue to-brand-purple rounded-2xl blur-xl opacity-15 group-hover:opacity-30 transition duration-1000"></div>
-                
-                <div class="relative bg-brand-card/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
-                    <!-- Titlebar -->
-                    <div class="bg-brand-dark/90 px-4 pt-3 pb-0 border-b border-slate-900 flex justify-between items-end transition-colors duration-500">
-                        <div class="flex gap-2 mb-3">
-                            <span class="w-2 h-2 bg-rose-500 rounded-full inline-block"></span>
-                            <span class="w-2 h-2 bg-amber-500 rounded-full inline-block"></span>
-                            <span class="w-2 h-2 bg-emerald-500 rounded-full inline-block"></span>
-                        </div>
-                        
-                        <!-- Interactive Tabs -->
-                        <div class="flex gap-1 text-[9px] font-mono">
-                            <button id="tab-py" onclick="switchTab('py')" class="px-2 sm:px-3 py-1.5 border-b-2 border-brand-accent bg-brand-card text-brand-accent font-semibold rounded-t-lg transition-all">binux.py</button>
-                            <button id="tab-html" onclick="switchTab('html')" class="px-2 sm:px-3 py-1.5 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">index.html</button>
-                            <button id="tab-css" onclick="switchTab('css')" class="px-2 sm:px-3 py-1.5 border-b-2 border-transparent text-slate-500 hover:text-slate-300 font-semibold rounded-t-lg transition-all">style.css</button>
-                        </div>
-                    </div>
-                    <!-- Typing Canvas (break-all for perfect responsive wordwrap) -->
-                    <div class="p-4 sm:p-6 font-mono text-[9px] sm:text-[11px] md:text-xs leading-relaxed text-slate-300 min-h-[250px] sm:min-h-[290px] flex flex-col justify-start bg-brand-card/95 overflow-x-hidden break-all">
-                        <pre class="whitespace-pre-wrap font-mono select-none break-all" id="typewriter-code" dir="ltr"></pre><span class="cursor"></span>
-                    </div>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 pt-2 text-[10px] text-slate-500">
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>Architecture-first</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>Performance-driven</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>Built to scale</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Scroll Down indicator -->
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-bounce cursor-pointer z-20">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-widest text-slate-500">کشف شاهکارها</span>
-            <svg class="w-3.5 h-3.5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-        </div>
-    </section>
+            <!-- Left Column: Engineering Dashboard -->
+            <div class="w-full max-w-2xl mx-auto lg:ml-auto relative group order-2 lg:order-1">
+                <div class="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 via-brand-neonBlue/10 to-brand-purple/10 rounded-[2rem] blur-3xl opacity-40 group-hover:opacity-60 transition duration-1000"></div>
 
-    <!-- Section 2: Portfolio Gallery -->
-    <section id="gallery" class="py-16 sm:py-24 border-t border-slate-900 bg-brand-dark/40 relative z-10 scroll-mt-20 transition-colors duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">پروژه‌های انجام شده بینوکس</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-brand-textSecondary text-xs sm:text-sm px-4 leading-relaxed">نمونه‌ای از پروژه‌های نرم‌افزاری و وبی که در حوزه‌های سازمانی، CRM، اتوماسیون و تجربه دیجیتال توسعه داده شده‌اند.</p>
-            </div>
+                <div class="relative overflow-hidden rounded-[1.6rem] border border-white/[0.08] bg-brand-card/90 shadow-[0_30px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+                    <!-- Dashboard Header -->
+                    <div class="flex items-center justify-between gap-4 px-4 sm:px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.015]">
+                        <div class="flex items-center gap-2 text-left" dir="ltr">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-400/90"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400/90"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/90"></span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[9px] sm:text-[10px] font-mono tracking-wider text-slate-500" dir="ltr">
+                            <span class="text-brand-accent">BINUX</span>
+                            <span>/</span>
+                            <span>ENGINEERING CONTROL</span>
+                        </div>
+                        <div class="inline-flex items-center gap-1.5 text-[9px] font-bold text-brand-accent bg-brand-accent/10 border border-brand-accent/15 px-2 py-1 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                            SYSTEM READY
+                        </div>
+                    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
-                {% for project in projects %}
-                <button type="button" data-project-slug="{{ project.slug }}" onclick="openProjectModal('{{ project.slug }}')" class="spotlight-card group relative text-right w-full bg-slate-950/40 border border-slate-900/60 rounded-2xl p-4 sm:p-5 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 transition-all duration-300 hover:-translate-y-1">
-                    <div class="spotlight-border absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(130px circle at var(--x, 0px) var(--y, 0px), rgba(16, 185, 129, 0.4), transparent 80%); z-index: -1;"></div>
-                    <div class="relative z-10 space-y-4">
-                        {% if project.cover_image %}
-                            <div class="h-40 sm:h-44 w-full bg-brand-dark rounded-xl border border-slate-800 overflow-hidden">
-                                <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="p-4 sm:p-5">
+                        <!-- Status Cards -->
+                        <div class="grid grid-cols-3 gap-2.5 sm:gap-3">
+                            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-[9px] font-mono text-slate-500">API</span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(16,185,129,0.7)]"></span>
+                                </div>
+                                <p class="text-xs font-bold text-brand-textPrimary">Operational</p>
+                                <p class="text-[9px] text-slate-500 mt-1">Healthy</p>
                             </div>
-                        {% else %}
-                            <div class="h-40 sm:h-44 w-full bg-gradient-to-br from-brand-dark via-slate-900 to-brand-card rounded-xl border border-slate-800 flex items-center justify-center overflow-hidden">
-                                <div class="text-center px-3">
-                                    <div class="text-[9px] font-mono text-brand-accent tracking-widest mb-2">[// {{ project.category|upper }}]</div>
-                                    <div class="text-sm font-bold text-slate-200">{{ project.title }}</div>
+                            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-[9px] font-mono text-slate-500">DATABASE</span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(16,185,129,0.7)]"></span>
+                                </div>
+                                <p class="text-xs font-bold text-brand-textPrimary">Connected</p>
+                                <p class="text-[9px] text-slate-500 mt-1">Stable</p>
+                            </div>
+                            <div class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-[9px] font-mono text-slate-500">DEPLOY</span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.7)]"></span>
+                                </div>
+                                <p class="text-xs font-bold text-brand-textPrimary">Ready</p>
+                                <p class="text-[9px] text-slate-500 mt-1">Pipeline OK</p>
+                            </div>
+                        </div>
+
+                        <!-- Main Telemetry Panel -->
+                        <div class="mt-3 rounded-2xl border border-white/[0.06] bg-black/20 overflow-hidden">
+                            <div class="flex items-center justify-between px-4 py-3 border-b border-white/[0.05]">
+                                <div>
+                                    <p class="text-[9px] font-mono text-slate-500 tracking-wider">ENGINEERING OVERVIEW</p>
+                                    <p class="text-sm font-bold text-brand-textPrimary mt-1">System health at a glance</p>
+                                </div>
+                                <span class="text-[9px] font-mono text-slate-600">DEMO TELEMETRY</span>
+                            </div>
+
+                            <div class="p-4">
+                                <div class="grid grid-cols-[1fr_auto] gap-5 items-end">
+                                    <div>
+                                        <div class="flex items-end gap-2" dir="ltr">
+                                            <span class="text-4xl sm:text-5xl font-black tracking-tight text-brand-textPrimary">98%</span>
+                                            <span class="text-[10px] font-semibold text-brand-accent pb-2">HEALTH</span>
+                                        </div>
+                                        <div class="mt-4 grid grid-cols-7 items-end gap-1.5 h-16" aria-hidden="true">
+                                            <span class="h-5 rounded-sm bg-emerald-400/25"></span>
+                                            <span class="h-8 rounded-sm bg-emerald-400/35"></span>
+                                            <span class="h-6 rounded-sm bg-emerald-400/25"></span>
+                                            <span class="h-10 rounded-sm bg-emerald-400/50"></span>
+                                            <span class="h-8 rounded-sm bg-emerald-400/35"></span>
+                                            <span class="h-12 rounded-sm bg-emerald-400/70"></span>
+                                            <span class="h-14 rounded-sm bg-brand-accent shadow-[0_0_16px_rgba(16,185,129,0.25)]"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="min-w-[118px] space-y-2.5 text-left" dir="ltr">
+                                        <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-3 py-2">
+                                            <div class="text-[8px] text-slate-500">ARCHITECTURE</div>
+                                            <div class="text-[11px] font-bold text-brand-textPrimary mt-0.5">MODULAR</div>
+                                        </div>
+                                        <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-3 py-2">
+                                            <div class="text-[8px] text-slate-500">FOCUS</div>
+                                            <div class="text-[11px] font-bold text-brand-textPrimary mt-0.5">SCALE × UX</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Signal strip -->
+                                <div class="mt-4 grid grid-cols-4 gap-2">
+                                    <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-2.5 py-2">
+                                        <div class="text-[8px] text-slate-500">BUILD</div>
+                                        <div class="mt-1 text-[10px] font-bold text-brand-textPrimary">READY</div>
+                                    </div>
+                                    <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-2.5 py-2">
+                                        <div class="text-[8px] text-slate-500">SECURITY</div>
+                                        <div class="mt-1 text-[10px] font-bold text-brand-textPrimary">GUARDED</div>
+                                    </div>
+                                    <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-2.5 py-2">
+                                        <div class="text-[8px] text-slate-500">DELIVERY</div>
+                                        <div class="mt-1 text-[10px] font-bold text-brand-textPrimary">FAST</div>
+                                    </div>
+                                    <div class="rounded-lg border border-white/[0.05] bg-white/[0.02] px-2.5 py-2">
+                                        <div class="text-[8px] text-slate-500">QUALITY</div>
+                                        <div class="mt-1 text-[10px] font-bold text-brand-accent">HIGH</div>
+                                    </div>
                                 </div>
                             </div>
-                        {% endif %}
-                        <div>
-                            <div class="text-[10px] text-brand-accent font-semibold mb-1">{{ project.category }}</div>
-                            <h3 class="text-base sm:text-lg font-bold text-brand-textPrimary">{{ project.title }}</h3>
                         </div>
-                        <p class="text-brand-textSecondary text-xs leading-6 line-clamp-3">{{ project.short_description }}</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            {% for tech in project.technology_list|slice:":3" %}
-                                <span class="px-2 py-1 bg-brand-card border border-slate-800 rounded-md text-[9px] text-slate-400 font-mono">{{ tech }}</span>
-                            {% endfor %}
+
+                        <!-- Bottom System Readout -->
+                        <div class="mt-3 flex items-center justify-between gap-4 px-1 text-[9px] font-mono text-slate-500" dir="ltr">
+                            <span>binux.engineering</span>
+                            <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>READY FOR SCALE</span>
                         </div>
-                        <div class="pt-1 text-xs font-bold text-brand-accent group-hover:text-white transition-colors">مشاهده آلبوم و جزئیات ←</div>
-                    </div>
-                </button>
-                {% empty %}
-                    <div class="md:col-span-2 lg:col-span-4 text-center py-12 text-sm text-slate-500">هنوز پروژه‌ای برای نمایش ثبت نشده است.</div>
-                {% endfor %}
-            </div>
-
-            <div class="mt-10 sm:mt-12 text-center">
-                <a href="{% url 'pages:projects' %}" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-800 text-xs font-bold text-slate-300 hover:border-brand-accent/30 hover:text-brand-accent transition-all">
-                    ادامه و مشاهده همه پروژه‌ها
-                    <span aria-hidden="true">←</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3: Technical Capabilities -->
-    <section id="about" class="py-16 sm:py-24 border-t border-slate-900/60 relative z-10 scroll-mt-20 transition-colors duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
-                <h2 class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400">توانمندی‌های فنی بینوکس</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-brand-accent to-brand-neonBlue mx-auto rounded-full"></div>
-                <p class="text-brand-textSecondary text-xs sm:text-sm px-4 leading-relaxed">توسعه نرم‌افزارهای اختصاصی و راهکارهای دیجیتال برای کسب‌وکارها؛ از تحلیل و طراحی معماری نرم‌افزار تا توسعه، استقرار و پشتیبانی.</p>
-            </div>
-
-            <!-- Technical Capabilities Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                <!-- Card 1: Software Architecture -->
-                <div onclick="toggleChipset(this, 'architecture-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden">
-                    <div class="w-10 h-10 bg-emerald-500/10 text-brand-accent rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">معماری نرم‌افزار مقیاس‌پذیر</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">نرم‌افزارهای اختصاصی را با معماری اصولی و قابل توسعه طراحی می‌کنیم تا با رشد کاربران، داده‌ها و فرآیندهای کسب‌وکار، عملکرد، امنیت و پایداری سیستم حفظ شود.</p>
-                    <div id="architecture-code" class="hidden text-left font-mono text-[9px] text-brand-accent bg-black/60 p-2 rounded border border-slate-900">
-                        Architecture<br>
-                        Scalable Systems<br>
-                        Clean Architecture
                     </div>
                 </div>
 
-                <!-- Card 2: Enterprise Systems -->
-                <div onclick="toggleChipset(this, 'systems-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-neonBlue/20 transition-all duration-300 relative overflow-hidden">
-                    <div class="w-10 h-10 bg-blue-500/10 text-brand-neonBlue rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18v16H3zM7 8h4v3H7zm0 5h4v3H7zm6-5h4v8h-4z"></path></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">طراحی و توسعه سیستم‌های سازمانی</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">راهکارهای نرم‌افزاری متناسب با فرآیندهای هر سازمان؛ از طراحی و توسعه سیستم‌های CRM، DMS و ERP تا سامانه‌های مدیریت منابع، مشتریان، اسناد و فرآیندهای داخلی.</p>
-                    <div id="systems-code" class="hidden text-left font-mono text-[9px] text-brand-neonBlue bg-black/60 p-2 rounded border border-slate-900">
-                        CRM / DMS / ERP<br>
-                        Business Systems<br>
-                        Custom Software
-                    </div>
-                </div>
-
-                <!-- Card 3: Applications and Web -->
-                <div onclick="toggleChipset(this, 'applications-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-brand-purple/20 transition-all duration-300 relative overflow-hidden">
-                    <div class="w-10 h-10 bg-purple-500/10 text-brand-purple rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zM9 7h6"></path></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">توسعه اپلیکیشن و وب‌اپلیکیشن اختصاصی</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">طراحی و توسعه اپلیکیشن، وب‌اپلیکیشن و APIهای اختصاصی با تمرکز بر تجربه کاربری، امنیت، عملکرد بالا و قابلیت توسعه در آینده.</p>
-                    <div id="applications-code" class="hidden text-left font-mono text-[9px] text-brand-purple bg-black/60 p-2 rounded border border-slate-900">
-                        Web Application<br>
-                        Mobile Application<br>
-                        REST API
-                    </div>
-                </div>
-
-                <!-- Card 4: Infrastructure and Deployment -->
-                <div onclick="toggleChipset(this, 'infrastructure-code')" class="group cursor-pointer bg-brand-card border border-slate-900 rounded-2xl p-6 space-y-4 hover:border-pink-500/20 transition-all duration-300 relative overflow-hidden">
-                    <div class="w-10 h-10 bg-pink-500/10 text-pink-400 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 6a2 2 0 012-2h10a2 2 0 012 2v3H5V6zm0 7h14v5a2 2 0 01-2 2H7a2 2 0 01-2-2v-5z"></path></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-brand-textPrimary">استقرار، زیرساخت و پشتیبانی نرم‌افزار</h3>
-                    <p class="text-brand-textSecondary text-xs leading-relaxed">از آماده‌سازی سرور و محیط اجرا تا استقرار، مانیتورینگ، بهینه‌سازی و پشتیبانی، در تمام چرخه عمر نرم‌افزار همراه کسب‌وکار شما هستیم.</p>
-                    <div id="infrastructure-code" class="hidden text-left font-mono text-[9px] text-pink-400 bg-black/60 p-2 rounded border border-slate-900">
-                        Deployment<br>
-                        Monitoring<br>
-                        Infrastructure<br>
-                        Maintenance
-                    </div>
-                </div>
+                <!-- Keep existing typewriter engine compatible, but hidden from visual UI -->
+                <div id="typewriter-code" class="sr-only" aria-hidden="true"></div>
             </div>
         </div>
     </section>
