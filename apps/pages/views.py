@@ -2,9 +2,74 @@ import json
 import re
 
 from django.http import Http404
+from django.templatetags.static import static
 from django.views.generic import TemplateView
 
 from .models import Project
+
+
+SITE_NAME = "بینوکس | Binux"
+SITE_LOGO_PATH = "images/logo.png"
+
+
+def _seo_image_url(request):
+    return request.build_absolute_uri(static(SITE_LOGO_PATH))
+
+
+def _organization_schema(request):
+    return {
+        "@type": "Organization",
+        "@id": request.build_absolute_uri("/") + "#organization",
+        "name": "بینوکس",
+        "alternateName": "Binux",
+        "url": request.build_absolute_uri("/"),
+        "logo": {
+            "@type": "ImageObject",
+            "url": _seo_image_url(request),
+        },
+        "sameAs": [
+            "https://t.me/binux_studio",
+            "https://instagram.com/binux_studio",
+        ],
+    }
+
+
+def _webpage_schema(request, title, description, page_type="WebPage"):
+    return {
+        "@context": "https://schema.org",
+        "@type": page_type,
+        "name": title,
+        "description": description,
+        "url": request.build_absolute_uri(request.path),
+        "isPartOf": {
+            "@type": "WebSite",
+            "@id": request.build_absolute_uri("/") + "#website",
+            "name": SITE_NAME,
+            "url": request.build_absolute_uri("/"),
+        },
+        "about": {
+            "@id": request.build_absolute_uri("/") + "#organization",
+        },
+    }
+
+
+def _breadcrumb_schema(request, items):
+    elements = []
+    for position, item in enumerate(items, start=1):
+        element = {
+            "@type": "ListItem",
+            "position": position,
+            "name": item["name"],
+        }
+        if item.get("url"):
+            element["item"] = request.build_absolute_uri(item["url"])
+        elements.append(element)
+
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": elements,
+    }
 
 
 ARTICLES = [
@@ -638,16 +703,28 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["seo_title"] = "طراحی سایت‌های پیشرفته با بینوکس (Binux) | بهینه‌سازی شده برای گوگل"
-        context["seo_description"] = "آژانس دیجیتال بینوکس (Binux) ارائه دهنده خدمات طراحی سایت مدرن با جنگو، متمرکز بر سرعت بی‌نظیر و سئوی حداکثری."
-        context["seo_keywords"] = "بینوکس, Binux, طراحی وب سایت, سئو سایت, جنگو لینوکس"
+        context["seo_title"] = "طراحی سایت اختصاصی و نرم‌افزار سازمانی با Django | بینوکس"
+        context["seo_description"] = "بینوکس توسعه‌دهنده سایت اختصاصی، CRM، ERP و سامانه‌های سازمانی با Django و Python؛ از تحلیل و معماری تا توسعه، استقرار و پشتیبانی."
+        context["seo_keywords"] = "طراحی سایت اختصاصی, طراحی سایت شرکتی, CRM, ERP, Django, Python, نرم افزار سازمانی"
+        context["seo_robots"] = "index, follow"
         context["canonical_url"] = self.request.build_absolute_uri("/")
-        projects = list(
+        context["og_type"] = "website"
+        context["og_image"] = _seo_image_url(self.request)
+        context["organization_schema"] = json.dumps(_organization_schema(self.request), ensure_ascii=False)
+        context["webpage_schema"] = json.dumps(
+            _webpage_schema(
+                self.request,
+                context["seo_title"],
+                context["seo_description"],
+                page_type="WebPage",
+            ),
+            ensure_ascii=False,
+        )
+        context["projects"] = list(
             Project.objects.filter(is_published=True, is_featured=True)
             .prefetch_related("gallery")
         )
-        context["projects"] = projects
-        context["projects_payload"] = project_payload(projects)
+        context["projects_payload"] = project_payload(context["projects"])
         return context
 
 
@@ -656,16 +733,180 @@ class ProjectsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["seo_title"] = "پروژه‌های انجام شده بینوکس | نمونه کارهای نرم‌افزاری"
-        context["seo_description"] = "فهرست پروژه‌های انجام شده بینوکس شامل ERP، CRM، اتوماسیون فروش، سامانه‌های سازمانی و وب‌سایت‌های تعاملی."
+        context["seo_title"] = "نمونه کار طراحی سایت و نرم‌افزار اختصاصی | بینوکس"
+        context["seo_description"] = "نمونه کارهای بینوکس در طراحی سایت، CRM، ERP، اتوماسیون و سامانه‌های سازمانی؛ همراه با توضیح فنی و فناوری‌های استفاده‌شده."
+        context["seo_keywords"] = "نمونه کار طراحی سایت, نمونه کار نرم افزار, پروژه CRM, پروژه ERP, Django"
+        context["seo_robots"] = "index, follow"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "website"
+        context["og_image"] = _seo_image_url(self.request)
+
         projects = list(
             Project.objects.filter(is_published=True)
             .prefetch_related("gallery")
         )
         context["projects"] = projects
         context["projects_payload"] = project_payload(projects)
+        context["itemlist_schema"] = json.dumps(
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "نمونه‌کارهای بینوکس",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": index,
+                        "name": project.title,
+                        "url": self.request.build_absolute_uri(
+                            reverse("pages:project_detail", kwargs={"slug": project.slug})
+                        ),
+                    }
+                    for index, project in enumerate(projects, start=1)
+                ],
+            },
+            ensure_ascii=False,
+        )
+        context["breadcrumb_schema"] = json.dumps(
+            _breadcrumb_schema(
+                self.request,
+                [
+                    {"name": "خانه", "url": "/"},
+                    {"name": "پروژه‌های انجام شده", "url": self.request.path},
+                ],
+            ),
+            ensure_ascii=False,
+        )
         return context
+
+
+class ProjectDetailView(TemplateView):
+    template_name = "pages/project_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = kwargs.get("slug")
+        project = (
+            Project.objects.filter(slug=slug, is_published=True)
+            .prefetch_related("gallery")
+            .first()
+        )
+        if project is None:
+            raise Http404
+
+        context["project"] = project
+        context["seo_title"] = f"{project.title} | نمونه کار بینوکس"
+        context["seo_description"] = project.short_description
+        context["seo_keywords"] = ", ".join(project.technology_list + [project.category, project.title])
+        context["seo_robots"] = "index, follow"
+        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "article"
+        context["og_image"] = (
+            self.request.build_absolute_uri(project.cover_image.url)
+            if project.cover_image
+            else _seo_image_url(self.request)
+        )
+        context["breadcrumb_schema"] = json.dumps(
+            _breadcrumb_schema(
+                self.request,
+                [
+                    {"name": "خانه", "url": "/"},
+                    {"name": "پروژه‌های انجام شده", "url": "/projects/"},
+                    {"name": project.title, "url": self.request.path},
+                ],
+            ),
+            ensure_ascii=False,
+        )
+        context["project_schema"] = json.dumps(
+            {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                "name": project.title,
+                "description": project.short_description,
+                "url": context["canonical_url"],
+                "creator": _organization_schema(self.request),
+                "keywords": context["seo_keywords"],
+                **(
+                    {"image": context["og_image"]}
+                    if project.cover_image
+                    else {}
+                ),
+            },
+            ensure_ascii=False,
+        )
+        return context
+
+
+class ElectronicsView(TemplateView):
+    template_name = "pages/electronics.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["seo_title"] = "بینوکس الکترونیک و IoT | آزمایشگاه سخت‌افزار بینوکس"
+        context["seo_description"] = "آزمایشگاه سخت‌افزار و اینترنت اشیاء بینوکس؛ بخش تحقیق و توسعه محصولات الکترونیکی و IoT."
+        context["seo_keywords"] = "بینوکس الکترونیک, IoT, اینترنت اشیا, سخت افزار"
+        context["seo_robots"] = "noindex, follow"
+        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "website"
+        context["og_image"] = _seo_image_url(self.request)
+        context["webpage_schema"] = json.dumps(
+            _webpage_schema(
+                self.request,
+                context["seo_title"],
+                context["seo_description"],
+                page_type="WebPage",
+            ),
+            ensure_ascii=False,
+        )
+        return context
+
+
+class ArticlesView(TemplateView):
+    template_name = "pages/articles.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["articles"] = ARTICLES
+        context["seo_title"] = "مقاله‌های تکنولوژی، سئو و توسعه نرم‌افزار | وبلاگ بینوکس"
+        context["seo_description"] = "مقالات کاربردی بینوکس درباره سئو، طراحی سایت، سرعت وب، CRM، ERP، Django، Python، API و زیرساخت نرم‌افزار."
+        context["seo_keywords"] = ", ".join(article["keywords"] for article in ARTICLES)
+        context["seo_robots"] = "index, follow"
+        context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "website"
+        context["og_image"] = _seo_image_url(self.request)
+        context["itemlist_schema"] = json.dumps(
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "مقاله‌های تکنولوژی بینوکس",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": index,
+                        "name": article["title"],
+                        "url": self.request.build_absolute_uri(
+                            reverse(
+                                "pages:article_detail",
+                                kwargs={"slug": article["slug"]},
+                            )
+                        ),
+                    }
+                    for index, article in enumerate(ARTICLES, start=1)
+                ],
+            },
+            ensure_ascii=False,
+        )
+        context["breadcrumb_schema"] = json.dumps(
+            _breadcrumb_schema(
+                self.request,
+                [
+                    {"name": "خانه", "url": "/"},
+                    {"name": "مقاله‌های تکنولوژی", "url": self.request.path},
+                ],
+            ),
+            ensure_ascii=False,
+        )
+        return context
+
 
 
 def project_payload(projects):
@@ -734,7 +975,10 @@ class ArticleDetailView(TemplateView):
         context["seo_title"] = f'{article["title"]} | بینوکس'
         context["seo_description"] = article["summary"]
         context["seo_keywords"] = article["keywords"]
+        context["seo_robots"] = "index, follow"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "article"
+        context["og_image"] = _seo_image_url(self.request)
         context["author_name"] = "تیم مهندسی بینوکس"
         context["author_url"] = self.request.build_absolute_uri("/about/")
 
@@ -751,31 +995,16 @@ class ArticleDetailView(TemplateView):
 
         article_body = re.sub(r"<[^>]+>", " ", article["content"])
         article_body = re.sub(r"\s+", " ", article_body).strip()
+
         context["breadcrumb_schema"] = json.dumps(
-            {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "خانه",
-                        "item": self.request.build_absolute_uri("/"),
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "مقاله‌های تکنولوژی",
-                        "item": self.request.build_absolute_uri("/articles/"),
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": article["title"],
-                        "item": context["canonical_url"],
-                    },
+            _breadcrumb_schema(
+                self.request,
+                [
+                    {"name": "خانه", "url": "/"},
+                    {"name": "مقاله‌های تکنولوژی", "url": "/articles/"},
+                    {"name": article["title"], "url": self.request.path},
                 ],
-            },
+            ),
             ensure_ascii=False,
         )
 
@@ -800,6 +1029,10 @@ class ArticleDetailView(TemplateView):
                     "@type": "Organization",
                     "name": "Binux",
                     "url": self.request.build_absolute_uri("/"),
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": _seo_image_url(self.request),
+                    },
                 },
                 "articleSection": article["category"],
                 "keywords": article["keywords"],
@@ -815,7 +1048,25 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["seo_title"] = "درباره ما | گروه فناوری و آژانس دیجیتال بینوکس"
-        context["seo_description"] = "آشنایی با تیم فنی بینوکس، اطلاعات تماس، آدرس پیج اینستاگرام، کانال تلگرام، ایمیل پشتیبانی و اینماد بینوکس."
+        context["seo_title"] = "درباره بینوکس | تیم توسعه نرم‌افزار و راهکارهای دیجیتال"
+        context["seo_description"] = "آشنایی با تیم فنی بینوکس و راهکارهای توسعه نرم‌افزار، طراحی سایت، CRM، ERP و سامانه‌های سازمانی."
+        context["seo_keywords"] = "درباره بینوکس, تیم توسعه نرم افزار, طراحی سایت, CRM, ERP"
+        context["seo_robots"] = "index, follow"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
+        context["og_type"] = "website"
+        context["og_image"] = _seo_image_url(self.request)
+        context["webpage_schema"] = json.dumps(
+            _webpage_schema(
+                self.request,
+                context["seo_title"],
+                context["seo_description"],
+                page_type="AboutPage",
+            ),
+            ensure_ascii=False,
+        )
+        context["organization_schema"] = json.dumps(
+            _organization_schema(self.request),
+            ensure_ascii=False,
+        )
         return context
+
