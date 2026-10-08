@@ -7,14 +7,16 @@
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
     <meta name="author" content="تیم مهندسی بینوکس">
-    {% if seo_keywords %}<meta name="keywords" content="{{ seo_keywords }}">{% endif %}
-    <meta name="robots" content="index, follow">
+    {% if seo_keywords %}{% endif %}
+    <meta name="robots" content="{{ seo_robots }}">
     <link rel="canonical" href="{{ canonical_url }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ seo_title }}">
     <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="{{ canonical_url }}">
     <meta property="article:published_time" content="{{ article.date_iso }}">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -96,7 +98,7 @@
 
             <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-400">
                 <a href="{% url 'pages:home' %}" class="hover:text-emerald-400 transition-colors">خانه</a>
-                <a href="{% url 'pages:home' %}#gallery" class="hover:text-emerald-400 transition-colors">پروژه‌ها</a>
+                <a href="{% url 'pages:projects' %}" class="hover:text-emerald-400 transition-colors">پروژه‌ها</a>
                 <a href="{% url 'pages:electronics' %}" class="hover:text-emerald-400 transition-colors">بینوکس الکترونیک</a>
                 <a href="{% url 'pages:articles' %}" class="text-emerald-400">مقاله‌های تکنولوژی</a>
                 <a href="{% url 'pages:about' %}" class="hover:text-emerald-400 transition-colors">درباره ما</a>
@@ -109,7 +111,7 @@
         <div id="mobile-menu" class="hidden lg:hidden border-t border-white/5 bg-black/40 backdrop-blur-xl px-4 py-5">
             <nav class="grid gap-1 text-sm font-semibold">
                 <a href="{% url 'pages:home' %}" class="px-4 py-3 rounded-xl text-slate-400 hover:bg-white/[0.03] hover:text-emerald-400">خانه</a>
-                <a href="{% url 'pages:home' %}#gallery" class="px-4 py-3 rounded-xl text-slate-400 hover:bg-white/[0.03] hover:text-emerald-400">پروژه‌ها</a>
+                <a href="{% url 'pages:projects' %}" class="px-4 py-3 rounded-xl text-slate-400 hover:bg-white/[0.03] hover:text-emerald-400">پروژه‌ها</a>
                 <a href="{% url 'pages:electronics' %}" class="px-4 py-3 rounded-xl text-slate-400 hover:bg-white/[0.03] hover:text-emerald-400">بینوکس الکترونیک</a>
                 <a href="{% url 'pages:articles' %}" class="px-4 py-3 rounded-xl bg-emerald-500/[0.06] text-emerald-400">مقاله‌های تکنولوژی</a>
                 <a href="{% url 'pages:about' %}" class="px-4 py-3 rounded-xl text-slate-400 hover:bg-white/[0.03] hover:text-emerald-400">درباره ما</a>
@@ -178,7 +180,7 @@
                             <h2 class="mt-2 text-xl sm:text-2xl font-black">برای این مسئله راهکار نرم‌افزاری می‌خواهید؟</h2>
                             <p class="mt-2 text-sm leading-8 text-slate-400">از تحلیل نیازمندی و طراحی معماری تا توسعه، استقرار و پشتیبانی؛ تیم بینوکس می‌تواند پروژه را متناسب با فرایند واقعی کسب‌وکار شما طراحی کند.</p>
                             <div class="mt-5 flex flex-col sm:flex-row gap-3">
-                                <a href="{% url 'pages:home' %}#gallery" class="inline-flex justify-center px-5 py-3 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs hover:bg-emerald-300 transition-all">مشاهده پروژه‌ها</a>
+                                <a href="{% url 'pages:projects' %}" class="inline-flex justify-center px-5 py-3 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs hover:bg-emerald-300 transition-all">مشاهده پروژه‌ها</a>
                                 <a href="{% url 'pages:about' %}" class="inline-flex justify-center px-5 py-3 rounded-xl border border-slate-700 text-slate-300 font-bold text-xs hover:border-emerald-500/25 hover:text-emerald-400 transition-all">درخواست مشاوره</a>
                             </div>
                         </div>
