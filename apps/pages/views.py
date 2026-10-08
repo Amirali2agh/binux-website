@@ -706,7 +706,7 @@ class HomeView(TemplateView):
         context["seo_title"] = "طراحی سایت اختصاصی و نرم‌افزار سازمانی با Django | بینوکس"
         context["seo_description"] = "بینوکس توسعه‌دهنده سایت اختصاصی، CRM، ERP و سامانه‌های سازمانی با Django و Python؛ از تحلیل و معماری تا توسعه، استقرار و پشتیبانی."
         context["seo_keywords"] = "طراحی سایت اختصاصی, طراحی سایت شرکتی, CRM, ERP, Django, Python, نرم افزار سازمانی"
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri("/")
         context["og_type"] = "website"
         context["og_image"] = _seo_image_url(self.request)
@@ -736,7 +736,7 @@ class ProjectsView(TemplateView):
         context["seo_title"] = "نمونه کار طراحی سایت و نرم‌افزار اختصاصی | بینوکس"
         context["seo_description"] = "نمونه کارهای بینوکس در طراحی سایت، CRM، ERP، اتوماسیون و سامانه‌های سازمانی؛ همراه با توضیح فنی و فناوری‌های استفاده‌شده."
         context["seo_keywords"] = "نمونه کار طراحی سایت, نمونه کار نرم افزار, پروژه CRM, پروژه ERP, Django"
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
         context["og_type"] = "website"
         context["og_image"] = _seo_image_url(self.request)
@@ -825,7 +825,7 @@ class ProjectDetailView(TemplateView):
         context["seo_title"] = f"{project.title} | نمونه کار بینوکس"
         context["seo_description"] = project.short_description
         context["seo_keywords"] = ", ".join(project.technology_list + [project.category, project.title])
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
         context["og_type"] = "article"
         context["og_image"] = (
@@ -897,7 +897,7 @@ class ArticlesView(TemplateView):
         context["seo_title"] = "مقاله‌های تکنولوژی، سئو و توسعه نرم‌افزار | وبلاگ بینوکس"
         context["seo_description"] = "مقالات کاربردی بینوکس درباره سئو، طراحی سایت، سرعت وب، CRM، ERP، Django، Python، API و زیرساخت نرم‌افزار."
         context["seo_keywords"] = ", ".join(article["keywords"] for article in ARTICLES)
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
         context["og_type"] = "website"
         context["og_image"] = _seo_image_url(self.request)
@@ -950,7 +950,7 @@ class ArticleDetailView(TemplateView):
         context["seo_title"] = f'{article["title"]} | بینوکس'
         context["seo_description"] = article["summary"]
         context["seo_keywords"] = article["keywords"]
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
         context["og_type"] = "article"
         context["og_image"] = _seo_image_url(self.request)
@@ -1026,7 +1026,7 @@ class AboutView(TemplateView):
         context["seo_title"] = "درباره بینوکس | تیم توسعه نرم‌افزار و راهکارهای دیجیتال"
         context["seo_description"] = "آشنایی با تیم فنی بینوکس و راهکارهای توسعه نرم‌افزار، طراحی سایت، CRM، ERP و سامانه‌های سازمانی."
         context["seo_keywords"] = "درباره بینوکس, تیم توسعه نرم افزار, طراحی سایت, CRM, ERP"
-        context["seo_robots"] = "index, follow"
+        context["seo_robots"] = "index, follow, max-image-preview:large"
         context["canonical_url"] = self.request.build_absolute_uri(self.request.path)
         context["og_type"] = "website"
         context["og_image"] = _seo_image_url(self.request)
