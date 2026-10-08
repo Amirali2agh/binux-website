@@ -119,7 +119,7 @@
             <article class="rounded-3xl overflow-hidden border border-slate-900/80 bg-brand-card/70 backdrop-blur-xl">
                 {% if project.cover_image %}
                     <div class="relative h-[260px] sm:h-[420px] overflow-hidden bg-brand-dark">
-                        <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover">
+                        <img decoding="async" src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
                         <div class="absolute top-5 left-5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] font-mono text-slate-300">BINUX CASE STUDY</div>
                     </div>
@@ -192,7 +192,7 @@
                     {% for image in images %}
                         {% if image.is_active %}
                         <figure class="rounded-2xl overflow-hidden border border-slate-900 bg-brand-card/60">
-                            <img src="{{ image.image.url }}" alt="{{ image.alt_text|default:project.title }}" loading="lazy" class="w-full aspect-[4/3] object-cover">
+                            <img decoding="async" src="{{ image.image.url }}" alt="{{ image.alt_text|default:project.title }}" loading="lazy" class="w-full aspect-[4/3] object-cover">
                             {% if image.caption %}
                                 <figcaption class="px-4 py-3 text-[10px] text-slate-500">{{ image.caption }}</figcaption>
                             {% endif %}
