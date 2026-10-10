@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
+    <meta name="author" content="گروه بینوکس">
+    <meta name="robots" content="{{ seo_robots }}">
+    <meta name="theme-color" content="#010206">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="fa-IR" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:site_name" content="بینوکس | Binux">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:alt" content="خدمات گروه بینوکس | Binux">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: 'var(--bg-dark)',
+                            card: 'var(--bg-card)',
+                            textPrimary: 'var(--text-primary)',
+                            textSecondary: 'var(--text-secondary)',
+                            accent: '#10B981',
+                            neonBlue: '#3B82F6',
+                            purple: '#8B5CF6'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        :root {
+            --bg-dark: #010206;
+            --bg-card: #060913;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+        :root.light {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+        }
+        .dot-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle, black 40%, transparent 95%);
+            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
+        }
+        :root.light .dot-grid { background-image: radial-gradient(circle, rgba(15,23,42,.04) 1px, transparent 1px); }
+        .service-card { transition: transform .28s ease, border-color .28s ease; }
+        .service-card:hover { transform: translateY(-3px); }
+    </style>
+
+    <script type="application/ld+json">{{ organization_schema|safe }}</script>
+    <script type="application/ld+json">{{ webpage_schema|safe }}</script>
+    <script type="application/ld+json">{{ itemlist_schema|safe }}</script>
+    <script type="application/ld+json">{{ breadcrumb_schema|safe }}</script>
+</head>
+<body class="bg-brand-dark text-brand-textPrimary font-sans min-h-screen relative overflow-x-hidden transition-colors duration-500">
+    <div class="absolute inset-0 dot-grid pointer-events-none"></div>
+
+    <header class="sticky top-0 z-50 border-b border-slate-900/60 bg-brand-dark/75 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+            <a href="{% url 'pages:home' %}" class="flex items-center gap-3" aria-label="صفحه اصلی بینوکس">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent flex items-center justify-center font-black">&lt;/&gt;</div>
+                <div>
+                    <div class="text-sm font-black">خدمات بینوکس</div>
+                    <div class="text-[10px] text-slate-500">Binux Services</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="toggleServicesTheme()" class="w-10 h-10 rounded-xl border border-slate-800 bg-brand-card/60 text-slate-400 hover:text-brand-accent transition-all" aria-label="تغییر تم">
+                    <span id="services-theme-icon">☾</span>
+                </button>
+                <a href="{% url 'pages:home' %}" class="hidden sm:inline-flex items-center px-4 py-2.5 rounded-xl border border-slate-800 text-xs font-bold text-slate-300 hover:border-brand-accent/30 hover:text-brand-accent transition-all">صفحه اصلی</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+            <nav aria-label="مسیر صفحه" class="mb-6 text-[11px] text-slate-500">
+                <ol class="flex flex-wrap items-center gap-2">
+                    <li><a href="{% url 'pages:home' %}" class="hover:text-emerald-400 transition-colors">خانه</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-400" aria-current="page">خدمات</li>
+                </ol>
+            </nav>
+
+            <!-- Intro -->
+            <section class="max-w-4xl mb-14 sm:mb-20">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-[10px] text-brand-accent font-semibold mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                    BINUX SERVICES
+                </div>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.35] tracking-tight">
+                    خدمات برنامه نویسی، طراحی سایت و نرم‌افزار سازمانی
+                </h1>
+                <div class="mt-6 space-y-4 text-sm sm:text-base leading-9 text-brand-textSecondary max-w-3xl">
+                    <p>
+                        گروه بینوکس (Binux) یک تیم فنی است که از تحلیل و طراحی معماری تا توسعه، استقرار و پشتیبانی
+                        در کنار کسب‌وکار شما می‌ماند. تمرکز ما روی چهار حوزه است: <strong>برنامه‌نویسی حرفه‌ای</strong>،
+                        <strong>طراحی سایت</strong>، <strong>برنامه‌نویسی اپلیکیشن</strong> و ساخت
+                        <strong>نرم‌افزار مدیریت شرکت</strong> مانند CRM، ERP و DMS.
+                    </p>
+                    <p>
+                        هر خدمت یک صفحه اختصاصی دارد تا بتوانید پیش از تماس، دامنه کار، خروجی‌های قابل تحویل و
+                        مسیر اجرای پروژه را ببینید.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Service cards -->
+            <section class="mb-14 sm:mb-20">
+                <h2 class="text-2xl sm:text-3xl font-black mb-7">خدمات گروه بینوکس</h2>
+                <div class="grid gap-5 sm:grid-cols-2">
+                    {% for service in services %}
+                    <a href="{% url 'pages:service_detail' service.slug %}" class="service-card group rounded-3xl border border-slate-900 bg-brand-card/60 p-6 sm:p-7 {{ service.accent_ring }} block">
+                        <div class="flex items-start justify-between gap-4">
+                            <span class="w-10 h-10 rounded-xl {{ service.accent_soft }} border {{ service.accent_border }} {{ service.accent_text }} flex items-center justify-center font-mono text-xs">{{ service.icon }}</span>
+                            <span class="text-[9px] font-mono tracking-[0.18em] text-slate-600">{{ service.eyebrow }}</span>
+                        </div>
+                        <h3 class="mt-5 text-lg font-black text-brand-textPrimary">{{ service.name }}</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary">{{ service.card_description }}</p>
+                        <div class="mt-5 flex flex-wrap gap-2">
+                            {% for tech in service.stack|slice:":4" %}
+                            <span class="px-2.5 py-1.5 rounded-lg border border-slate-900 bg-black/20 text-[9px] text-slate-500 font-mono">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-6 flex items-center gap-2 text-xs font-bold {{ service.accent_text }}">
+                            <span>مشاهده جزئیات خدمت</span>
+                            <span class="transition-transform duration-300 group-hover:-translate-x-1">←</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Why Binux -->
+            <section class="mb-14 sm:mb-20">
+                <h2 class="text-2xl sm:text-3xl font-black mb-7">چرا کسب‌وکارها بینوکس را انتخاب می‌کنند؟</h2>
+                <div class="grid gap-5 md:grid-cols-3">
+                    <article class="rounded-2xl border border-slate-900 bg-brand-card/60 p-6">
+                        <h3 class="text-base font-black text-emerald-400">تیم فنی، نه واسطه</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary">
+                            پروژه را به تیم دیگری واگذار نمی‌کنیم. تحلیل، طراحی، توسعه و استقرار توسط همان تیمی انجام می‌شود
+                            که با شما درباره نیازها صحبت کرده است.
+                        </p>
+                    </article>
+                    <article class="rounded-2xl border border-slate-900 bg-brand-card/60 p-6">
+                        <h3 class="text-base font-black text-blue-400">معماری ماژولار و قابل توسعه</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary">
+                            سیستم را طوری می‌سازیم که با رشد کسب‌وکار قابل توسعه بماند؛ بدون بازنویسی پرهزینه و بدون
+                            وابستگی به یک فناوری محدودکننده.
+                        </p>
+                    </article>
+                    <article class="rounded-2xl border border-slate-900 bg-brand-card/60 p-6">
+                        <h3 class="text-base font-black text-purple-400">شفافیت در دامنه و هزینه</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary">
+                            محدوده پروژه، خروجی‌های قابل تحویل و زمان‌بندی پیش از شروع مکتوب می‌شود تا در میانه کار
+                            غافلگیری وجود نداشته باشد.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="rounded-3xl border border-brand-accent/20 bg-brand-accent/[0.06] p-8 sm:p-10 text-center">
+                <p class="text-[10px] uppercase tracking-[.18em] text-emerald-400 font-bold">START A PROJECT</p>
+                <h2 class="mt-3 text-2xl sm:text-3xl font-black">پروژه‌تان را با گروه بینوکس شروع کنید</h2>
+                <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary max-w-2xl mx-auto">
+                    نیاز خود را بگویید تا پس از بررسی، پیشنهادی شفاف با محدوده پروژه، زمان‌بندی و برآورد هزینه دریافت کنید.
+                </p>
+                <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="tel:09120000000" class="bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3.5 rounded-xl transition-all hover:bg-emerald-300">تماس با بینوکس</a>
+                    <a href="{% url 'pages:projects' %}" class="border border-slate-800 text-slate-300 font-bold text-xs px-6 py-3.5 rounded-xl transition-all hover:border-emerald-500/25">مشاهده نمونه‌کارها</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-950 py-7 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            {% include "pages/partials/services_footer.html" %}
+            <p class="text-center text-[10px] text-slate-500">© 2026 گروه بینوکس (Binux). توسعه نرم‌افزار، طراحی سایت و راهکارهای دیجیتال.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleServicesTheme() {
+            document.documentElement.classList.toggle('light');
+            const light = document.documentElement.classList.contains('light');
+            localStorage.setItem('theme', light ? 'light' : 'dark');
+            document.getElementById('services-theme-icon').textContent = light ? '☀' : '☾';
+        }
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light');
+            document.getElementById('services-theme-icon').textContent = '☀';
+        }
+    </script>
+</body>
+</html>

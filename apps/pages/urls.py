@@ -8,12 +8,16 @@ from apps.pages.views import (
     HomeView,
     ProjectDetailView,
     ProjectsView,
+    ServiceDetailView,
+    ServicesView,
 )
 
 app_name = "pages"
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
+    path("services/", ServicesView.as_view(), name="services"),
+    path("services/<slug:slug>/", ServiceDetailView.as_view(), name="service_detail"),
     path("projects/", ProjectsView.as_view(), name="projects"),
     path("projects/<slug:slug>/", ProjectDetailView.as_view(), name="project_detail"),
     path("electronics/", ElectronicsView.as_view(), name="electronics"),

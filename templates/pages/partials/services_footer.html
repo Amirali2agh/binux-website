@@ -1,0 +1,15 @@
+{% comment %}
+Compact services link row. Kept visually identical to the existing footer
+typography so the site's appearance is unchanged; it exists purely to give
+crawlers a site-wide path into the service landing pages.
+{% endcomment %}
+<nav aria-label="خدمات بینوکس" class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px] text-slate-500 mb-4">
+    <a href="{% url 'pages:services' %}" class="font-bold text-slate-400 hover:text-emerald-400 transition-colors">خدمات بینوکس</a>
+    <a href="{% url 'pages:service_detail' 'software-development' %}" class="hover:text-emerald-400 transition-colors">برنامه نویسی حرفه‌ای</a>
+    <a href="{% url 'pages:service_detail' 'web-design' %}" class="hover:text-emerald-400 transition-colors">طراحی سایت</a>
+    <a href="{% url 'pages:service_detail' 'app-development' %}" class="hover:text-emerald-400 transition-colors">برنامه نویسی اپلیکیشن</a>
+    <a href="{% url 'pages:service_detail' 'management-software' %}" class="hover:text-emerald-400 transition-colors">نرم‌افزار مدیریت شرکت</a>
+    <a href="{% url 'pages:articles' %}" class="hover:text-emerald-400 transition-colors">مقاله‌های تکنولوژی</a>
+    <a href="{% url 'pages:projects' %}" class="hover:text-emerald-400 transition-colors">پروژه‌ها</a>
+    <a href="{% url 'pages:about' %}" class="hover:text-emerald-400 transition-colors">ارتباط با ما</a>
+</nav>

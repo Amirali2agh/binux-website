@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
+    <meta name="author" content="گروه بینوکس">
+    <meta name="robots" content="{{ seo_robots }}">
+    <meta name="theme-color" content="#010206">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="fa-IR" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:site_name" content="بینوکس | Binux">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:alt" content="{{ service.h1 }} | بینوکس">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: 'var(--bg-dark)',
+                            card: 'var(--bg-card)',
+                            textPrimary: 'var(--text-primary)',
+                            textSecondary: 'var(--text-secondary)',
+                            accent: '#10B981',
+                            neonBlue: '#3B82F6',
+                            purple: '#8B5CF6'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        :root {
+            --bg-dark: #010206;
+            --bg-card: #060913;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: {{ service.accent_hex }};
+        }
+        :root.light {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+        }
+        .dot-grid {
+            background-size: 32px 32px;
+            background-image: radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle, black 40%, transparent 95%);
+            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
+        }
+        :root.light .dot-grid { background-image: radial-gradient(circle, rgba(15,23,42,.04) 1px, transparent 1px); }
+        .service-faq summary { cursor: pointer; list-style: none; }
+        .service-faq summary::-webkit-details-marker { display: none; }
+        .service-faq summary::after { content: '+'; float: left; font-weight: 900; color: var(--accent); }
+        .service-faq[open] summary::after { content: '−'; }
+    </style>
+
+    <script type="application/ld+json">{{ organization_schema|safe }}</script>
+    <script type="application/ld+json">{{ webpage_schema|safe }}</script>
+    <script type="application/ld+json">{{ service_schema|safe }}</script>
+    <script type="application/ld+json">{{ breadcrumb_schema|safe }}</script>
+    {% if faq_schema %}<script type="application/ld+json">{{ faq_schema|safe }}</script>{% endif %}
+</head>
+<body class="bg-brand-dark text-brand-textPrimary font-sans min-h-screen relative overflow-x-hidden transition-colors duration-500">
+    <div class="absolute inset-0 dot-grid pointer-events-none"></div>
+
+    <header class="sticky top-0 z-50 border-b border-slate-900/60 bg-brand-dark/75 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+            <a href="{% url 'pages:services' %}" class="flex items-center gap-3" aria-label="همه خدمات بینوکس">
+                <div class="w-10 h-10 rounded-xl {{ service.accent_soft }} border {{ service.accent_border }} {{ service.accent_text }} flex items-center justify-center font-black">&lt;/&gt;</div>
+                <div>
+                    <div class="text-sm font-black">خدمات بینوکس</div>
+                    <div class="text-[10px] text-slate-500">Binux Services</div>
+                </div>
+            </a>
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="toggleServiceTheme()" class="w-10 h-10 rounded-xl border border-slate-800 bg-brand-card/60 text-slate-400 {{ service.accent_text }} transition-all" aria-label="تغییر تم">
+                    <span id="service-theme-icon">☾</span>
+                </button>
+                <a href="{% url 'pages:home' %}" class="hidden sm:inline-flex items-center px-4 py-2.5 rounded-xl border border-slate-800 text-xs font-bold text-slate-300 hover:border-brand-accent/30 hover:text-brand-accent transition-all">صفحه اصلی</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+            <nav aria-label="مسیر صفحه" class="mb-6 text-[11px] text-slate-500">
+                <ol class="flex flex-wrap items-center gap-2">
+                    <li><a href="{% url 'pages:home' %}" class="hover:{{ service.accent_text }} transition-colors">خانه</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li><a href="{% url 'pages:services' %}" class="hover:{{ service.accent_text }} transition-colors">خدمات</a></li>
+                    <li aria-hidden="true">/</li>
+                    <li class="text-slate-400" aria-current="page">{{ service.name }}</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <section class="max-w-4xl mb-14 sm:mb-20">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border {{ service.accent_border }} {{ service.accent_soft }} text-[10px] {{ service.accent_text }} font-semibold mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full {{ service.accent_solid }}"></span>
+                    {{ service.eyebrow }}
+                </div>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.35] tracking-tight">{{ service.h1 }}</h1>
+                <div class="mt-6 space-y-4 text-sm sm:text-base leading-9 text-brand-textSecondary max-w-3xl">
+                    {% for paragraph in service.intro %}
+                    <p>{{ paragraph|safe }}</p>
+                    {% endfor %}
+                </div>
+                <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                    <a href="tel:09120000000" class="{{ service.accent_solid }} text-slate-950 font-black text-xs px-6 py-3.5 rounded-xl text-center transition-all hover:opacity-90">درخواست مشاوره و برآورد</a>
+                    <a href="{% url 'pages:projects' %}" class="border border-slate-800 text-slate-300 font-bold text-xs px-6 py-3.5 rounded-xl text-center {{ service.accent_ring }} transition-all">مشاهده نمونه‌کارها</a>
+                </div>
+            </section>
+
+            <!-- Highlights -->
+            <section class="mb-14 sm:mb-20">
+                <h2 class="text-2xl sm:text-3xl font-black mb-7">این خدمت دقیقاً چه چیزی به کسب‌وکار شما اضافه می‌کند؟</h2>
+                <div class="grid gap-5 sm:grid-cols-2">
+                    {% for item in service.highlights %}
+                    <article class="rounded-2xl border border-slate-900 bg-brand-card/60 p-6 {{ service.accent_ring }} transition-all">
+                        <h3 class="text-base font-black {{ service.accent_text }}">{{ item.title }}</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary">{{ item.body }}</p>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Capabilities + process -->
+            <section class="mb-14 sm:mb-20 grid gap-8 lg:grid-cols-2 items-start">
+                <div class="rounded-3xl border border-slate-900 bg-brand-card/60 p-6 sm:p-8">
+                    <h2 class="text-xl sm:text-2xl font-black">خروجی‌های قابل تحویل</h2>
+                    <ul class="mt-6 space-y-3">
+                        {% for capability in service.capabilities %}
+                        <li class="flex items-start gap-3 text-xs sm:text-sm leading-7 text-brand-textSecondary">
+                            <span class="{{ service.accent_text }} font-black shrink-0">✓</span>
+                            <span>{{ capability }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="rounded-3xl border border-slate-900 bg-brand-card/60 p-6 sm:p-8">
+                    <h2 class="text-xl sm:text-2xl font-black">مسیر اجرای پروژه</h2>
+                    <ol class="mt-6 space-y-5">
+                        {% for step in service.process %}
+                        <li class="flex items-start gap-4">
+                            <span class="w-8 h-8 shrink-0 rounded-lg {{ service.accent_soft }} border {{ service.accent_border }} {{ service.accent_text }} flex items-center justify-center font-mono text-[10px]">{{ step.step }}</span>
+                            <div>
+                                <div class="text-sm font-bold text-brand-textPrimary">{{ step.title }}</div>
+                                <p class="mt-1 text-xs leading-7 text-brand-textSecondary">{{ step.body }}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Stack -->
+            <section class="mb-14 sm:mb-20">
+                <h2 class="text-xl sm:text-2xl font-black mb-5">فناوری‌های این خدمت</h2>
+                <div class="flex flex-wrap gap-2">
+                    {% for tech in service.stack %}
+                    <span class="px-3 py-2 rounded-lg border border-slate-900 bg-brand-card/60 text-[10px] text-slate-400 font-mono">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="mb-14 sm:mb-20">
+                <h2 class="text-2xl sm:text-3xl font-black mb-7">پرسش‌های پرتکرار درباره {{ service.name }}</h2>
+                <div class="space-y-3">
+                    {% for faq in service.faqs %}
+                    <details class="service-faq rounded-2xl border border-slate-900 bg-brand-card/60 p-5 sm:p-6">
+                        <summary class="text-sm font-bold text-brand-textPrimary">{{ faq.q }}</summary>
+                        <p class="mt-4 text-xs sm:text-sm leading-8 text-brand-textSecondary">{{ faq.a }}</p>
+                    </details>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Related services -->
+            {% if related_services %}
+            <section class="mb-14 sm:mb-20">
+                <div class="flex items-end justify-between gap-4 mb-5">
+                    <h2 class="text-xl sm:text-2xl font-black">سایر خدمات بینوکس</h2>
+                    <a href="{% url 'pages:services' %}" class="text-xs font-bold text-slate-500 {{ service.accent_text }} transition-colors">همه خدمات ←</a>
+                </div>
+                <div class="grid gap-4 md:grid-cols-3">
+                    {% for other in related_services %}
+                    <a href="{% url 'pages:service_detail' other.slug %}" class="rounded-2xl border border-slate-900 bg-brand-card/60 p-5 {{ service.accent_ring }} transition-all">
+                        <span class="text-[10px] {{ service.accent_text }} font-mono">{{ other.eyebrow }}</span>
+                        <h3 class="mt-2 font-black text-sm leading-7">{{ other.name }}</h3>
+                        <p class="mt-2 text-xs text-slate-500 leading-6">{{ other.card_description }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Related articles -->
+            {% if related_articles %}
+            <section class="mb-14 sm:mb-20">
+                <div class="flex items-end justify-between gap-4 mb-5">
+                    <h2 class="text-xl sm:text-2xl font-black">مطالب مرتبط</h2>
+                    <a href="{% url 'pages:articles' %}" class="text-xs font-bold text-slate-500 {{ service.accent_text }} transition-colors">همه مقاله‌ها ←</a>
+                </div>
+                <div class="grid gap-4 md:grid-cols-3">
+                    {% for article in related_articles %}
+                    <a href="{% url 'pages:article_detail' article.slug %}" class="rounded-2xl border border-slate-900 bg-brand-card/60 p-5 {{ service.accent_ring }} transition-all">
+                        <span class="text-[10px] {{ service.accent_text }}">{{ article.category }}</span>
+                        <h3 class="mt-2 font-black text-sm leading-7">{{ article.title }}</h3>
+                        <p class="mt-2 text-xs text-slate-500 leading-6">{{ article.summary|truncatechars:120 }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- CTA -->
+            <section class="rounded-3xl border {{ service.accent_border }} {{ service.accent_soft }} p-8 sm:p-10 text-center">
+                <p class="text-[10px] uppercase tracking-[.18em] {{ service.accent_text }} font-bold">START A PROJECT</p>
+                <h2 class="mt-3 text-2xl sm:text-3xl font-black">پروژه‌تان را با گروه بینوکس شروع کنید</h2>
+                <p class="mt-3 text-xs sm:text-sm leading-8 text-brand-textSecondary max-w-2xl mx-auto">
+                    نیاز خود را بگویید تا پس از بررسی، پیشنهادی شفاف با محدوده پروژه، زمان‌بندی و برآورد هزینه دریافت کنید.
+                </p>
+                <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="tel:09120000000" class="{{ service.accent_solid }} text-slate-950 font-black text-xs px-6 py-3.5 rounded-xl transition-all hover:opacity-90">تماس با بینوکس</a>
+                    <a href="{% url 'pages:about' %}" class="border border-slate-800 text-slate-300 font-bold text-xs px-6 py-3.5 rounded-xl transition-all {{ service.accent_ring }}">اطلاعات تماس</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-950 py-7 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            {% include "pages/partials/services_footer.html" %}
+            <p class="text-center text-[10px] text-slate-500">© 2026 گروه بینوکس (Binux). توسعه نرم‌افزار، طراحی سایت و راهکارهای دیجیتال.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleServiceTheme() {
+            document.documentElement.classList.toggle('light');
+            const light = document.documentElement.classList.contains('light');
+            localStorage.setItem('theme', light ? 'light' : 'dark');
+            document.getElementById('service-theme-icon').textContent = light ? '☀' : '☾';
+        }
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light');
+            document.getElementById('service-theme-icon').textContent = '☀';
+        }
+    </script>
+</body>
+</html>
