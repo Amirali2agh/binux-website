@@ -1,14 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="scroll-smooth">
+<html lang="fa-IR" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
+    <meta name="author" content="گروه بینوکس">
+    <meta name="theme-color" content="#010206">
     <meta name="author" content="تیم مهندسی بینوکس">
     <meta name="robots" content="{{ seo_robots }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="fa-IR" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="بینوکس | Binux">
     <meta property="og:locale" content="fa_IR">
@@ -219,6 +224,7 @@
     </main>
 
     <footer class="border-t border-white/5 py-7 mt-6">
+        {% include "pages/partials/services_footer.html" %}
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
             <p>© ۲۰۲۶ گروه بینوکس (Binux). توسعه نرم‌افزار و راهکارهای دیجیتال.</p>
             <a href="tel:09120000000" class="font-bold hover:text-emerald-400 transition-colors">ارتباط با بینوکس</a>

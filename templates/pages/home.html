@@ -1,15 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="scroll-smooth">
+<html lang="fa-IR" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Meta Tags for SEO -->
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
+    <meta name="author" content="گروه بینوکس">
+    <meta name="theme-color" content="#010206">
     <meta name="robots" content="{{ seo_robots }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="fa-IR" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
 
     <!-- Open Graph / Social SEO -->
     <meta property="og:type" content="website">
@@ -318,7 +323,7 @@
                     </span>
                 </h1>
                 <p class="text-brand-textSecondary text-xs sm:text-sm md:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                    در بینوکس، نرم‌افزار را از ایده تا اجرا توسعه می‌دهیم؛ از طراحی و پیاده‌سازی سیستم‌های مدیریتی و سازمانی مانند CRM، DMS و ERP تا ساخت اپلیکیشن و طراحی وب‌سایت‌های حرفه‌ای. تیم فنی ما در تمام مسیر، از اولین مرحله تحلیل و طراحی تا توسعه، استقرار و پشتیبانی، همراه شماست.
+                    در بینوکس، نرم‌افزار را از ایده تا اجرا <a href="{% url 'pages:service_detail' 'software-development' %}" class="text-inherit hover:text-brand-accent transition-colors">توسعه می‌دهیم</a>؛ از طراحی و پیاده‌سازی <a href="{% url 'pages:service_detail' 'management-software' %}" class="text-inherit hover:text-brand-accent transition-colors">سیستم‌های مدیریتی و سازمانی</a> مانند <a href="{% url 'pages:service_detail' 'management-software' %}" class="text-inherit hover:text-brand-accent transition-colors">CRM، DMS و ERP</a> تا <a href="{% url 'pages:service_detail' 'app-development' %}" class="text-inherit hover:text-brand-accent transition-colors">ساخت اپلیکیشن</a> و <a href="{% url 'pages:service_detail' 'web-design' %}" class="text-inherit hover:text-brand-accent transition-colors">طراحی وب‌سایت‌های حرفه‌ای</a>. تیم فنی ما در تمام مسیر، از اولین مرحله تحلیل و طراحی تا توسعه، استقرار و پشتیبانی، همراه شماست.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 pt-3 justify-center lg:justify-start max-w-sm mx-auto sm:max-w-none">
@@ -625,6 +630,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10 bg-slate-950/60 backdrop-blur-md">
+        {% include "pages/partials/services_footer.html" %}
         <p class="px-4">© 2026 گروه بینوکس (Binux). پیاده‌سازی شده بر پایه معماری ارشد جنگو در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
 

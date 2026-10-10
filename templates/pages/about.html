@@ -1,13 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa-IR" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
+    <meta name="keywords" content="{{ seo_keywords }}">
+    <meta name="author" content="گروه بینوکس">
+    <meta name="theme-color" content="#010206">
     <meta name="robots" content="{{ seo_robots }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="fa-IR" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
     <meta property="og:type" content="{{ og_type }}">
     <meta property="og:site_name" content="بینوکس | Binux">
     <meta property="og:locale" content="fa_IR">
@@ -212,6 +217,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-950 py-6 text-center text-[10px] text-slate-500 relative z-10">
+        {% include "pages/partials/services_footer.html" %}
         <p>© 2026 گروه بینوکس (Binux). پیاده‌سازی شده در اکوسیستم اوبونتو لینوکس.</p>
     </footer>
 
